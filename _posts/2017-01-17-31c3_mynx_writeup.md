@@ -8,19 +8,17 @@ comments: true
 featured: true
 ---
 
-# mynx
+A writeup for mynx challenge from 31c3 CTF. Have fun :)
+
+## mynx
 
 **Category:** pwnable
-
 **Points:** 30
-
 **Type:** Off-by-One, Custom Heap Implementation
-
 **Description:**
-
 > mynx running on 188.40.18.80 1234
 
-## Custom Heap Implementation
+### Custom Heap Implementation
 
 전역변수 형태로 정의되어 있는 `heapTable@0x0804A900`와 `chunkCntTable@0x0804A904`와 `idxCnt@0x0804A940`가 Heap Management를 수행하는데 사용된다. `heapTable`의 경우 4096(0x1000)byte만큼 할당되는 메모리 블록들의 포인터 배열이며, 각각의 메모리 블록들은 256(0x100)byte 단위(**chunk**라 하자)로 16등분되어 사용된다. 그리고 `chunkCntTable`은 앞에 선언된 `heapTable`에 존재하는 chunk의 개수를 저장하고 있다. 만약 16개가 넘는다면 out-of-memory 에러를 출력하도록 되어있다. `idxCnt`는 이후에 저장되는 ascii_art 혹은 comment 의 id값을 저장하기 위한 변수이다. 해당 바이너리에서 사용되는 구조체는 크게 2가지 유형이 있다.
 
@@ -43,7 +41,7 @@ struct comment {
 
 두 구조체의 크기는 256(0x100)byte로 동일하다. 즉, 메모리 블록내에 256byte 단위로 존재하는 chunk만큼 할당이 되는 것이다.
 
-## Vulnerability
+### Vulnerability
 
 취약점은 `addComment@0x08048CE3`함수에 존재한다. `addAsciiart@0x08048D8B`의 경우 `read()` 함수로 입력받을 때, 247byte 만큼만 받는다. 하지만, `addComment`의 경우 할당된 크기(251byte)보다 1byte 더 크게 입력 받는다. 즉, 여기서 **Off-by-One** 취약점이 발생한다. 이는 절묘하게도 다음 chunk의 `type`값을 덮어쓸 수 있고, 결국 **Type Confusion** 취약점으로 연계될 수 있다.
 
@@ -172,10 +170,10 @@ gdb-peda$ x/65wx 0x0804b208
 0x804b308:	0x00000349
 ```
 
-## EIP Control
+### EIP Control
 
 실행흐름을 바꾸기 위해서는 여러가지 방법이 존재하지만 여기서는 고맙게도 함수 포인터(Function Pointer)가 존재한다. ![function_ptr]({{ site.url }}/images/2017-01-17/function_ptr.png) 심지어 인자 값까지 컨트롤 가능하므로 완벽한 취약점 조건이 된다.
 
-## Constructing an Information Leak
+### Constructing an Information Leak
 
 TBA
