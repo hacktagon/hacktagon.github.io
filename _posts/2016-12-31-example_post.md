@@ -3,7 +3,7 @@ layout: post
 title: "Posting Guide"
 description: Some description here!
 headline:
-modified: 2017-02-11
+modified: 2016-12-31
 category: research
 imagefeature:
 mathjax:
@@ -21,7 +21,7 @@ Second paragraph
 
 We begin with comparing the May and June versions of `jscript9.dll` in BinDiff:
 
-<img src="{{ site.url }}/images/2016-06-27/bindiff_diff.png" style="display: block; margin: auto;">
+<img src="{{ site.url }}/images/2016-12-31/bindiff_diff.png" style="display: block; margin: auto;">
 
 In pseudo-code, it looks like the following:
 
