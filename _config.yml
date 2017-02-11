@@ -1,26 +1,26 @@
-title:            Theori
-description:      "Theori, Inc."
-logo:             logo.png
+title:            HACKTAGON
+description:      "powered by mukpiece"
+logo:             logo_bug.png
 logo_white:       logo_white.png
-logo_pic:         logo_pic.png
-disqus_shortname: 'theori-io'
+logo_pic:         logo_bug_pic.png
+#disqus_shortname: 'hacktagon'
 share:            true
 dropcap:			true
 # Change url to your domain. Leave localhost server or blank when working locally.
-# or use the hint from http://jekyllrb.com/docs/github-pages/ to keep this the same 
+# or use the hint from http://jekyllrb.com/docs/github-pages/ to keep this the same
 # whether working locally or remotely. Start Jekyll with: jekyll serve --baseurl ''
-url:        	  'http://www.theori.io'
+url:        	  'http://hacktagon.github.io'
 
 # Owner/author information
 owner:
-  name:           Theori
-  avatar:         theori.png
-  email:          support@theori.io
+  name:           HACKTAGON
+  avatar:         bug.png
+  email:          hacktagon.kr@gmail.com
   # Use the coder's toolbox at http://coderstoolbox.net/string/#!encoding=xml&action=encode&charset=us_ascii to encode your description into XML string
-  description:    "Cybersecurity start-up focused on innovative R&amp;D. We love solving challenges that are said to be impossible!"
+  description:    "Shall we play a game?"
   # Social networking links used in footer. Update and remove as you like.
-  twitter:        theori_io
-  facebook:       theori.io
+  twitter:        hacktagon
+  facebook:       hacktagon
   github:         #hmfaysal
   instagram:      #hmfaysal
   # For Google Authorship https://plus.google.com/authorship
@@ -47,7 +47,7 @@ links:
     url: /about
 
 # http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
-timezone:    America/Chicago
+timezone:    Asia/Seoul
 future:      true
 markdown:    kramdown
 highlighter: rouge
@@ -70,7 +70,7 @@ kramdown:
 
 prose:
   rooturl: '_posts'
-  siteurl: 'http://www.theori.io'
+  siteurl: 'https://hacktagon.github.io'
   relativeLinks: #'http://hmfaysal.github.io/Notepad/links.jsonp'
   media: 'images'
   metadata:
