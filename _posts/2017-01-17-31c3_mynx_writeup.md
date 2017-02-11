@@ -3,7 +3,7 @@ layout: post
 title: "31C3 CTF mynx writeup"
 headline:
 modified: 2017-01-17
-category: pwnable, ctf
+categories: pwnable ctf
 comments: true
 featured: true
 ---
