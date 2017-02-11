@@ -18,7 +18,9 @@ A writeup for mynx challenge from 31c3 CTF. Have fun :)
 **Points:** 30  
 **Type:** Off-by-One, Custom Heap Implementation  
 **Description:**  
+
 > mynx running on 188.40.18.80 1234
+
 
 ### Custom Heap Implementation
 
