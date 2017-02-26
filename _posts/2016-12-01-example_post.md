@@ -3,7 +3,7 @@ layout: post
 title: "Posting Guide"
 description: Some description here!
 headline:
-modified: 2016-12-31
+modified: 2016-12-01
 category: research
 imagefeature:
 mathjax:
