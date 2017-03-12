@@ -2,7 +2,10 @@
 layout: post
 title:  "SQL Injection - Order by"
 tag:   Analysis
-categories: Web
+categories: Web sql_injection
+modified: 2016-12-22
+comments: true
+featured: true
 ---
 
 
