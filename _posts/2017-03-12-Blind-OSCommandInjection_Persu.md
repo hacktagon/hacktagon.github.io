@@ -5,11 +5,14 @@ tag:   Survey
 categories: IoT system persu
 ---
 
+
+### 본 문서는 아래 URL을 알기 쉽게 번역한 내용이므로, 상세 내용은 아래 URL을 참조하세요.
+
 번역 : https://www.contextis.com/resources/blog/data-exfiltration-blind-os-command-injection/
 
-# Blind OS Command Injection을 통한 데이터 추출
+### 제목 : Blind OS Command Injection을 통한 데이터 추출
 
-## blind OS Command Injection
+### blind OS Command Injection
 사용자의 입력이 시스템 명령에 사용될 수 있는 공격인 OS Command Injection의 한 종류로 시스템 명령의 수행 결과 값을 알 수 없을 때 사용하는 방법이다.
 
 기본적인 OS Command Injection을 이해 하기 위해서는 아래 URL 참조.
@@ -154,7 +157,7 @@ id
 uid=501(persu)
 ```
 
-## Blind OS Command Injection Prevention
+### Blind OS Command Injection Prevention
 OS Command Injection 공격은 IoT 디바이스에서 많이 발견되는 취약점이다. 이를 방어 하기 위한 방법은 아래와 같다.
 
 - 시스템 명령어 사용 시 상수 값을 통한 입력값 제한
