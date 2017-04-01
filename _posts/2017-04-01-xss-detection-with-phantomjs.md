@@ -94,6 +94,7 @@ XSS found: alert(1)
 ## 합체 Burpsuite!
 Python이 아닌 Burpsuite에서 직접 확장 프로그램을 통해 Phantomjs로 전달하고 결과를 받아오는 방법입니다.
 별도로 설명하지 않고 잘 설명되어있는 글을 링크합니다.
+
 https://nvisium.com/blog/2014/01/31/accurate-xss-detection-with-burpsuite/
 
 ## 결론
