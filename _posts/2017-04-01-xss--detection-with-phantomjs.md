@@ -8,7 +8,9 @@ comments: true
 featured: true
 ---
 
-Phantomjs를 사용하여 XSS(Cross-site Scripting)를 탐지하는 방법에 대해 소개합니다. 브라우저(Phantomjs)가 직접 스크립팅하여 취약점을 탐지하기에 문자열 탐지 방식보다 정확합니다. 하지만 Phantomjs가 페이지를 완성하는 시간만큼 추가적으로 시간이 소비 되는 단점이 있습니다.
+Phantomjs를 사용하여 XSS(Cross-site Scripting)를 탐지하는 방법에 대해 소개합니다. 
+
+브라우저(Phantomjs)가 직접 스크립팅하여 취약점을 탐지하기에 문자열 탐지 방식보다 정확합니다. 하지만 Phantomjs가 페이지를 완성하는 시간만큼 추가적으로 시간이 소비 되는 단점이 있습니다.
 
 본문에서는 Python을 통해 웹서버와 통신하고 받아온 HTTP Response를 Phantomjs에게 넘겨서 XSS 취약점이 발생하는지 확인하는 방법을 소개합니다. 추가적으로 Python이 아닌 Burpsuite에서 확장프로그램을 통해 탐지하는 방식을 소개합니다.
 
