@@ -45,23 +45,23 @@ featured: true
         |VM Ware 12 Pro|Attacker 환경 구축|
         |Wireshark 2.0.1|패킷 분석|
 
-<br>
+        <br>
 
      * 공격 흐름도
 
        * 프로그램 정상 작동 흐름도
 
-<br>
+       <br>
 
        <img src="{{ site.url }}/images/2017-04-02/5.png" style="display: block; margin: auto;">
 
        * 공격 흐름도
 
-<br>
+       <br>
 
        <img src="{{ site.url }}/images/2017-04-02/6.png" style="display: block; margin: auto;">
 
-<br>
+       <br>
 
 2. Proof of Concept
 
@@ -69,7 +69,7 @@ featured: true
 
      * Web 영역
 
-<br>
+     <br>
 
      <img src="{{ site.url }}/images/2017-04-02/1.png" style="display: block; margin: auto;">
 
@@ -77,13 +77,13 @@ featured: true
 
      * 게임 실행
 
-<br>
+     <br>
 
      <img src="{{ site.url }}/images/2017-04-02/2.png" style="display: block; margin: auto;">
 
      GAME START 버튼 클릭 시 GameStart() 함수를 호출하는 것을 확인할 수 있으며, 해당 함수는 아래 그림5와 같다. GameStart() 함수는 /cab/active.php를 요청하고, 반환된 응답(그림 6)을 이용하여 uid, upass, gname, gurl, gender, age, shutdown변수로 설정한다. 이 변수들은 fnStart() 함수의 인자로 사용 된다.
 
-<br>
+     <br>
 
      <img src="{{ site.url }}/images/2017-04-02/3.png" style="display: block; margin: auto;">
 
@@ -101,7 +101,7 @@ featured: true
      |age|XX|
      |shutdown|success|
 
-<br>
+     <br>
 
      <img src="{{ site.url }}/images/2017-04-02/7.png" style="display: block; margin: auto;">
 
@@ -117,7 +117,7 @@ featured: true
 
      * ActiveX 영역
 
-<br>
+     <br>
 
      <img src="{{ site.url }}/images/2017-04-02/8.png" style="display: block; margin: auto;">
 
@@ -161,7 +161,7 @@ featured: true
 
      * Web 영역
 
-<br>
+     <br>
 
      <img src="{{ site.url }}/images/2017-04-02/19.png" style="display: block; margin: auto;">
 
@@ -171,7 +171,7 @@ featured: true
 
      * ActiveX 영역
 
-<br>
+     <br>
 
      <img src="{{ site.url }}/images/2017-04-02/20.png" style="display: block; margin: auto;">
 
@@ -203,13 +203,13 @@ featured: true
 
      변조된 info 파일로 인하여 Victim이 file.txt 파일을 다운받는다. 같은 방식으로 file.txt로 인하여 Victim은 Hacktive_POC.exe를 다운받으며, 이를 Wireshark를 통해 확인할 수 있다.
 
-     <img src="{{ site.url }}/images/2017-04-02/27.PNG" style="display: block; margin: auto;">
+     <img src="{{ site.url }}/images/2017-04-02/27.{O}" style="display: block; margin: auto;">
 
      다음 그림에서 Victim의 컴퓨터에서 POC.html을 실행하면 변조된 info 파일 내부의 IF_EXE_FNAME로 인하여 악성 프로그램 Hacktive_POC.exe가 실행된다.
 
      <img src="{{ site.url }}/images/2017-04-02/28.png" style="display: block; margin: auto;">
 
-<br>
+     <br>
 
 3. 결론
 
@@ -217,13 +217,13 @@ featured: true
 
      * Web 영역 조치 방안
 
-<br>
+     <br>
 
      Web 영역에서는 해당 ActiveX의 Start() 함수 실행 시 사용되는 인자 값을 공격자가 확인 할 수 없도록, 인코딩을 하는 방안이 필요하다.
 
      * ActiveX 영역 조치 방안
 
-<br>
+     <br>
 
      게임 업데이트를 위한 info 파일 내 URL을 준인터가 패치를 위해 제공하는 주소로 고정 해야한다.
 
