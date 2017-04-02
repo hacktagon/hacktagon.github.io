@@ -203,7 +203,7 @@ featured: true
 
      변조된 info 파일로 인하여 Victim이 file.txt 파일을 다운받는다. 같은 방식으로 file.txt로 인하여 Victim은 Hacktive_POC.exe를 다운받으며, 이를 Wireshark를 통해 확인할 수 있다.
 
-     <img src="{{ site.url }}/images/2017-04-02/27.{O}" style="display: block; margin: auto;">
+     <img src="{{ site.url }}/images/2017-04-02/27.PNG" style="display: block; margin: auto;">
 
      다음 그림에서 Victim의 컴퓨터에서 POC.html을 실행하면 변조된 info 파일 내부의 IF_EXE_FNAME로 인하여 악성 프로그램 Hacktive_POC.exe가 실행된다.
 
