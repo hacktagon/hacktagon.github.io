@@ -35,14 +35,15 @@ MIPS는 IDA를 통해 Hexray(어셈블리어 -> C 코드 번역 기능)가 지�
 
 ## 1. system 함수를 이용한 command injection
 system 함수는 /bin/sh -c string를 호출하여 string에 지정된 명령어를 실행하고, 명령어가 끝난후 반환한다.
-1.1 사용법
+
+### 1.1 사용법
 
 ```
 #include<stdlib.h>
 int system(const char * string);
 ```
 
-1.2 반환값
+### 1.2 반환값
 
 /bin/sh를 실행시키기 위한 execve()의 호출이 실패했다면 127이 리턴되며, 다른 에러가 있다면 -1, 그렇지 않다면 명령어의 리턴코드가 반환됩니다.
 
@@ -50,7 +51,7 @@ string값이 NULL이고, system()이 shell을 이용할 수 있다면 0이 아�
 
 [출처] https://www.joinc.co.kr/w/man/3/system
 
-1.3 예제
+### 1.3 예제
 
 MIPS 디바이스에 실제로 사용되는 system 함수는 3가지 방식이 있습니다. (어디까지나 개인적인 의견)
 1.3.1 string 값이 Define되어 있는 경우
@@ -239,7 +240,8 @@ system함수에 인가 값인 string이 위의 경우처럼 사용자 입력 값
 popen 은 command 를 shell(:12)을 가동시켜서 열고 pipe(2)로 연결한다. pipe 는 기본적으로 단방향으로만 정의 되어 있음으로, 읽기전용 혹은 쓰기전용 으로만 열수 있으며, type 로 정의된다. popen 은 command 를 실행시키고 pip 연결을 위해서 내부적으로 fork() 와 pipe() 를 사용한다.
 command 는 실행쉘인 /bin/sh 에 -c 옵션을 사용하여서 전달되게 된다.
 pclose(2) 함수는 종료되는 관련 프로세스를 기다리며 wait(2) 가 반환하는 것처럼 명령어의 종료 상태를 반환한다.
-2.1 사용법
+
+### 2.1 사용법
 
 ```
 #include <stdio.h>
@@ -248,11 +250,11 @@ FILE *popen(const char *command, const char *type);
 int pclose();
 ```
 
-2.2 반환값
+### 2.2 반환값
 
 popen 은 실패할경우 NULL 을 반환한다. pclose 는 종료되는 관련 프로세스를 기다리며 명령어의 종료 상태를 반환한다. 에러가 발견될경우 -1 을 리턴한다.
 
-2.3 예제
+### 2.3 예제
 
 popen도 string 값이 정해져 있으냐, 사용자 입력 값으로부터 입력되느냐에 따라 나눠지는데
 정해져 있는 경우 system 함수에서 언급하여 넘어가도록 하겠다.
