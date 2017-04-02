@@ -63,4 +63,4 @@ featured: true
 
      결국 fnStart 함수는 다음과 같은 인자를 가지고 호출됨.
 
-     fnStart(“a5e9w80vb2c5bbbc3105383b6c77e4cdcd6ac152fffd405ec82dbd8e8d1be9ad86e5d263a1e415d7e671116fff57dcc4dd60f1f8baafa597af1ad27a0989e28de0692b3c5c0c808ef8ade0778c451da86eeff62e3e8735b21af702a91774e496cfff2abc72544c623d5ea989dbecd15656b95c6b9”, 40098, “getamped”, “http://sd-windysoft2.ktics.co.kr/Service/IF_info/v22”, 199509151, 22, “success”)
+     fnStart(“a5e9w80vb2c5bbbc3105383b6c77e4cdcd6ac152fffd405ec82dbd8e8d1be9ad86e5d263a1e415d7e671116fff57dcc4dd60f1f8baafa597af1ad27a0989e28de0692b3c5c0c808ef8ade0778c451da86eeff62e3e8735b21af702a91774e496cfff2abc72544c623d5ea989dbecd15656b95c6b9”, 40098, “xxxx”, “XXXXXXXXXXX”, XXXXXXX, XX, “success”)
