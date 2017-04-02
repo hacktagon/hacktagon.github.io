@@ -10,6 +10,8 @@ featured: true
 
 1분기에 공개된 WEB 환경의 Bug bounty중에 괜찮은 포스팅 목록입니다. 분기별로 주기적으로 연재할 생각이니까 많이 사랑해주세요!
 
+
+## Posts
 How I found a $5,000 Google Maps XSS (by fiddling with Protobuf) 
 작성자 Marin Moulinier
 https://medium.com/@marin_m/how-i-found-a-5-000-google-maps-xss-by-fiddling-with-protobuf-963ee0d9caff
