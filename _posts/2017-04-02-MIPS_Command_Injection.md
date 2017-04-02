@@ -21,7 +21,7 @@ MIPS는 IDA를 통해 Hexray(어셈블리어 -> C 코드 번역 기능)가 지�
 
 위 취약함수중 바이너리에 자주 사용되는 함수는 system, execl, popen, execv 순으로 등장하게 된다.
 
-<b>이 블로그에서는 system, popen에 대해서 command injection 방법을 포스팅한다.</b>
+<b>이 블로그에서는 system, popen 함수에 대해서 command injection 방법을 포스팅한다.</b>
 
 위에서 자주 사용되는 함수가 실제 데몬에서 어떻게 사용되는지 살펴 보겠다. 취약점 분석을 하다 보니 MIPS 어셈블리만이 가지고 있는 특정 규칙이 있다.
 
@@ -89,8 +89,13 @@ main+24 부분에 system 함수가 실행되는데, 함수 호출 규약에서 s
 
 1.3.2 string 값이 spritf, snprintf를 통해 얻어 오는 경우
 1.3.2 일 경우에 많은 취약점이 발견된다.
-snprintf :
-sprintf  :
+
+```
+sprintf  : (char *buffer, const char *format, ...)
+snprintf : (char *buffer, int buf_size, const char *format, ...)
+```
+
+sprintf, snprintf는 buffer 변수에 형식에 따라 만들어진 문자열이 저장된다.
 
 ```
 #include<stdio.h>
@@ -178,6 +183,7 @@ int main(void)
 	return 0;
 }
 ```
+
 \$a0 레지스터에는 snprintf의 결과 값인(리턴 값 아님) <b>cat 1.c</b> 가 들어가게 된다. system 함수는 이를 실행하여 1.c의 내용을 출력하게 된다.
 
 이런 소스 코드 및 어셈블리는 command injection 취약점을 가지고 있다.
@@ -199,6 +205,7 @@ int main(void)
 
 1  1.c	2  -2  2.c  mips
 ```
+
 결과적으로는 command injection 성공이다. 실제로 명령어 삽입이 가능한 특수문자에 대한 필터링이 걸려 있지 않기 때문이다. gdb를 통해 확실히 파악해보겠다.
 
 ```
@@ -211,12 +218,14 @@ int main(void)
 (gdb) x/s $a3
 0x7fff6c44:	 "1.c && ls"
 ```
+
 snprintf의 인자 값으로는 위 내용들이 포함되게 된다. 여기서 중요한 건 $a3 레지스터다.
 
 ```
 (gdb) x/s $a0
 0x7fff6c78:	 "cat 1.c && ls"
 ```
+
 system 함수에서 breakpoint를 걸고 확인한 $a0 레지스터는 <b> cat 1.c && ls </b> command injection이 가능하게 되는 것이다.
 
 1.3.3 string 값이 flash memory를 통해 얻어 오는 경우
@@ -231,12 +240,14 @@ popen 은 command 를 shell(:12)을 가동시켜서 열고 pipe(2)로 연결한�
 command 는 실행쉘인 /bin/sh 에 -c 옵션을 사용하여서 전달되게 된다.
 pclose(2) 함수는 종료되는 관련 프로세스를 기다리며 wait(2) 가 반환하는 것처럼 명령어의 종료 상태를 반환한다.
 2.1 사용법
+
 ```
 #include <stdio.h>
 
 FILE *popen(const char *command, const char *type);
 int pclose();
 ```
+
 2.2 반환값
 
 popen 은 실패할경우 NULL 을 반환한다. pclose 는 종료되는 관련 프로세스를 기다리며 명령어의 종료 상태를 반환한다. 에러가 발견될경우 -1 을 리턴한다.
@@ -293,6 +304,7 @@ int main(int argc, char *argv[])
 (gdb) x/s $a3
 0x7fff6e9f:	 "2.c"
 ```
+
 snprintf 부분에서는 인자 값이 정상적으로 들어가게 된다. 공격자가 입력한 값은 <b>2.c</b> cat 2.c 로 만들어진 값은 아래의 popen 함수에 입력된다.
 
 ```
@@ -307,11 +319,13 @@ snprintf 부분에서는 인자 값이 정상적으로 들어가게 된다. 공�
 (gdb) x/s $a0
 0x7fff6c88:	 "cat 2.c"
 ```
+
 popen(cat 2.c, r)로 함수가 실행되면 2.c를 읽어 온다.
 
 지금 부터는 command injection을 넣어 보겠다.
 
 큰 따옴표 방식이 아닌 그냥 command를 입력 값을 주었을 시 어떻게 되는지 보자.
+
 ```
 (gdb) r 2.c;ls
 Starting program: /home/user/3 2.c;ls
@@ -326,9 +340,11 @@ Breakpoint 1, 0x004007dc in main ()
 (gdb) x/s $a3
 0x7fff6e9f:	 "2.c"
 ```
+
 2.c;ls 중 2.c만 $a3레지스터에 남게 된다. 왜죠? ...무튼...
 
 "command" 방식으로 입력 값을 주었을 시 아래 와 같다.
+
 ```
 (gdb) r "2.c;ls"
 Starting program: /home/user/3 2.c ; ls
@@ -342,6 +358,7 @@ Breakpoint 1, 0x004007dc in main ()
 (gdb) x/s $a3
 0x7fff6e9c:	 "2.c;ls"
 ```
+
 $a3 레지스터가 "2.c;ls"로 설정되어 있다.
 
 ```
@@ -355,4 +372,5 @@ $a3 레지스터가 "2.c;ls"로 설정되어 있다.
 (gdb) x/s $a1
 0x400a5c:	 "r"
 ```
+
 popen함수에 snpritf값인 cat 2.c;ls가 넘어오게 되고, command injection이 실행되게 된다! 야호! 성공 :)
