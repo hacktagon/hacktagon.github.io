@@ -228,6 +228,7 @@ snprintf의 인자 값으로는 위 내용들이 포함되게 된다. 여기서 
 system 함수에서 breakpoint를 걸고 확인한 $a0 레지스터는 <b> cat 1.c && ls </b> command injection이 가능하게 되는 것이다.
 
 1.3.3 string 값이 flash memory를 통해 얻어 오는 경우
+
 system함수에 인가 값인 string이 위의 경우처럼 사용자 입력 값, 절대 값이 코드영역에서 처리되는 것이 아닌 flash memory에 저장되어 있는 string을 사용할 때가 있다.
 이유는 MIPS를 쓰는 대부분의 디바이스들은 소형 임베디드 장비로 초기 설정 값들이 flash memory(비 휘발성 메모리 : NVRAM)에 저장되야 하기 때문이다. 초기 계정, 비밀번호, MAC주소, IP주소 등 ...
 
