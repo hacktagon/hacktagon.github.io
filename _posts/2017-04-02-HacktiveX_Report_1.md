@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "ActiveX Bug Hunting"
+title: "ActiveX Bug Hunting 1"
 headline: ActiveX
 modified: 2017-04-02
 categories: RealWorld ActiveX HacktiveX Persu Elmo XothSec
@@ -225,6 +225,6 @@ featured: true
 
      <br>
 
-     게임 업데이트를 위한 info 파일 내 URL을 준인터가 패치를 위해 제공하는 주소로 고정 해야한다.
+     게임 업데이트를 위한 info 파일 내 URL을  패치를 위해 제공하는 주소로 고정 해야한다.
 
      게임의 특성상 패치가 자주 일어나게 되고 이에 따라 패치버전 별 관리를 위해 유동적인 패치 URL의 사용이 필요할 수 있다. 이와 같은 경우에는 URL의 Domain name부분이 패치를 위해 제공하는 URL인지 검증하는 단계가 필요하다.
