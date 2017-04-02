@@ -124,9 +124,7 @@ int main(int argc, char *argv[])
 ```
 
 간단한 소스를 짜보았는데 ... 우선 취약함수인 strcpy, sprintf는 사용하지 않고 오직 Command injection만 일어날 수 있는 소스 코드 인데..
-arvg[1]로 입력한 인자 값이 snprintf 함수를 통해 cat argv[1] 형태로 command_buf로 변환이 되고 최종적으로 system 함수를 통해 command_buf 내 있는 string이 실행되게 된다.
-
-command injection이 일어나기 위해서는 \$ \` \&\& \|\| \; 이런 특수문자를 이용하여 하는 것은 기본 전제로 깔고 들어가겠다.
+arvg[1]로 입력한 인자 값이 snprintf 함수를 통해 cat argv[1] 형태로 command_buf로 변환이 되고 최종적으로 system 함수를 통해 command_buf 내 있는 string이 실행되게 된다. command injection이 일어나기 위해서는 \$ \` \&\& \|\| \; 이런 특수문자를 이용하여 하는 것은 기본 전제로 깔고 들어가겠다.
 
 지금부터는 gdb를 통해 자세하게 파악해 보겠다.
 
