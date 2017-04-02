@@ -9,20 +9,19 @@ featured: true
 ---
 
 # MIPS Command Injection
-MIPS 기반의 디바이스에서 command Injection을 찾는 나름의 방법을 정리해 보았습니다.
+MIPS 기반의 디바이스에서 command Injection을 찾는 나름의 방법을 정리해 보았다.
 
-<b>Command Injection</b>은 사용자가 입력한 인자 값을 통해 명령어가 실행되는 취약점으로,
-system, execv, ececle, ececve, execlp, ececvp, popen, open, fork 이런 함수에서 사용되게 됩니다.
+<b>Command Injection</b>은 사용자가 입력한 인자 값을 통해 명령어가 실행되는 취약점으로, system, execv, ececle, ececve, execlp, ececvp, popen, open, fork 이런 함수에서 사용되게 된다.
 
-MIPS는 IDA를 통해 Hexray(어셈블리어 -> C 코드 번역 기능)가 지원되지 않습니다.
-최근 redtoc 플러그인 사용 시 일부 C 코드로 변환 할 수 있다. 아래 URL을 통해 확인 할 수 있으며, 바이너리 파일을 업로드하면 C 코드로 다운받을 수 있습니다.
+MIPS는 IDA를 통해 Hexray(어셈블리어 -> C 코드 번역 기능)가 지원되지 않는다.
+최근 redtoc 플러그인 사용 시 일부 C 코드로 변환 할 수 있다. 아래 URL을 통해 확인 할 수 있으며, 바이너리 파일을 업로드하면 C 코드로 다운받을 수 있다.
 
 - https://retdec.com
 
 
-위 취약함수중 바이너리에 자주 사용되는 함수는 system, execl, popen, execv 순으로 등장하게 됩니다.
+위 취약함수중 바이너리에 자주 사용되는 함수는 system, execl, popen, execv 순으로 등장하게 된다.
 
-위에서 자주 사용되는 함수가 실제 데몬에서 어떻게 사용되는지 살펴 보겠습니다. 취약점 분석을 하다 보니 MIPS 어셈블리만이 가지고 있는 특정 규칙이 있었습니다.
+위에서 자주 사용되는 함수가 실제 데몬에서 어떻게 사용되는지 살펴 보겠다. 취약점 분석을 하다 보니 MIPS 어셈블리만이 가지고 있는 특정 규칙이 있다.
 
 이것을 함수 호출 규약이라고 하죠! calling convention
 
@@ -30,6 +29,7 @@ MIPS는 IDA를 통해 Hexray(어셈블리어 -> C 코드 번역 기능)가 지�
 (현재까지 $t0 레지스터가 사용되는 경우는 보지 못함)
  - 함수 호출 규약 2. Jar opcode로 아래 한 줄을 실행시키고 자신을 실행 시키는 로직을 가지고 있습니다.
  - 함수 호출 규약 3. 함수가 실행되고 리턴 값은 $vx 레지스터에 저장된다.
+ - 함수 호출 규약 4. ra 는 return address를 의미하고 있음
 
 # 1. system 함수를 이용한 command injection
 system 함수는 /bin/sh -c string를 호출하여 string에 지정된 명령어를 실행하고, 명령어가 끝난후 반환한다.
@@ -215,3 +215,54 @@ snprintf의 인자 값으로는 위 내용들이 포함되게 된다. 여기서 
 system 함수에서 breakpoint를 걸고 확인한 $a0 레지스터는 <b> cat 1.c && ls </b> command injection이 가능하게 되는 것이다.
 
 1.3.3 string 값이 flash memory를 통해 얻어 오는 경우
+system함수에 인가 값인 string이 위의 경우처럼 사용자 입력 값, 절대 값이 코드영역에서 처리되는 것이 아닌 flash memory에 저장되어 있는 string을 사용할 때가 있다.
+이유는 MIPS를 쓰는 대부분의 디바이스들은 소형 임베디드 장비로 초기 설정 값들이 flash memory(비 휘발성 메모리 : NVRAM)에 저장되야 하기 때문이다. 초기 계정, 비밀번호, MAC주소, IP주소 등 ...
+
+해당 경우에는 결국 flash memory에 있는 값들 또한 spritf, snprintf 함수에 사용되기 마련이다. 사용자가 접근 할 수 있는 웹 페이지, 포트 등 을 통해서 해당 flash memory 데이터가 변경이 가능하고 변경 가능한 데이터가 system 인자로 사용될 경우 취약점이 발생할 수 있다. 이 부분은 마땅한 예제를 들 수 가 없어 실제 장비 분석하면서 나오는 경우 추가하도록 하겠다.
+
+
+# 2. popen 함수를 이용한 command injection
+popen 은 command 를 shell(:12)을 가동시켜서 열고 pipe(2)로 연결한다. pipe 는 기본적으로 단방향으로만 정의 되어 있음으로, 읽기전용 혹은 쓰기전용 으로만 열수 있으며, type 로 정의된다. popen 은 command 를 실행시키고 pip 연결을 위해서 내부적으로 fork() 와 pipe() 를 사용한다.
+command 는 실행쉘인 /bin/sh 에 -c 옵션을 사용하여서 전달되게 된다.
+pclose(2) 함수는 종료되는 관련 프로세스를 기다리며 wait(2) 가 반환하는 것처럼 명령어의 종료 상태를 반환한다.
+2.1 사용법
+```
+#include <stdio.h>
+
+FILE *popen(const char *command, const char *type);
+int pclose();
+```
+2.2 반환값
+popen 은 실패할경우 NULL 을 반환한다. pclose 는 종료되는 관련 프로세스를 기다리며 명령어의 종료 상태를 반환한다. 에러가 발견될경우 -1 을 리턴한다.
+
+2.3 예제
+popen도 string 값이 정해져 있으냐, 사용자 입력 값으로부터 입력되느냐에 따라 나눠지는데
+정해져 있는 경우 system 함수에서 언급하여 넘어가도록 하겠다.
+
+```
+int main(int argc, char *argv[])
+{
+	char input_buf[50];
+	char snprintf_ret[50];
+
+	snprintf(snprintf_ret,50,"cat %s",argv[1]);
+	printf("snprintf_ret %s \n",snprintf_ret);
+	FILE *fp;
+	fp = popen(snprintf_ret,"r");
+
+	if (fp == NULL)
+	{
+		perror("error : ");
+		exit(0);
+	}
+
+	while(fgets(input_buf, 50, fp) != NULL)
+	{
+		printf("%s",input_buf);
+	}
+	pclose(fp);
+}
+```
+
+위 예제 소스 코드는 snprintf를 통해 입력 받은 snprintf_ret 값이 popen 함수의 인자 값으로 사용되게 된다.
+/bin/sh -c | cat 2.c 이런 형식으로 shell을 쓰게 되고 pipe를 쓰는건가?!
