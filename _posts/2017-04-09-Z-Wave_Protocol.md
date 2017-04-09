@@ -89,11 +89,12 @@ Routing을 하기 위해서는 노드의 정보를 얻고, 최적의 라우트 �
 
 ### 2.5 Application 계층
 응용 계층은 홈 ID, 노드 ID의 컨트롤러 및 복제의 할당이다. 응용 계층은 개발자가 특정하게 구현을 해야 한다.
-
+<center>
 |Command Class|Description|
 |-|-|
 |00h-1Fh|Reserved for the Z-Wave Protocol |
 |20h-FFh|Reserved for the Z-Wave Application|
+</center>
 
 Application은 해당 IoT의 기능을 나타나며 거기에 들어가는 Value값은 Command parameter로 구성한다.
 
@@ -124,15 +125,19 @@ Z-Wave는 Controller과 Slave 두개로 구성
 Z-Wave 동작과정은 HomeID 를 가지고 있는 Master가 slave에게 HomeID, NodeID를 부여하는 Pairing 과정에서 부터 시작된다.
 
 아래 그림과 같이 Master는 Slave를 찾기 위해 Broadcast를 통해 자신을 알리게 된다.
+
 <img src="{{ site.url }}/images/persu/zz5.png" style="display: block; margin: auto;">
 
 이후 Pairing 대상인 Slave는 여기서 응답을 주게 된다.
+
 <img src="{{ site.url }}/images/persu/zz6.png" style="display: block; margin: auto;">
 
 Master는 HomeID에 관한 NodeID를 부여하게 되는데, 이로써 Slave는 HomeID를 가진 디바이스간 통신을 할 수 있다.
+
 <img src="{{ site.url }}/images/persu/zz7.png" style="display: block; margin: auto;">
 
 이런 연결 과정이 끝나게 되면, Slave는 Master에게 자신의 정보를 전달하게 되고 Slave가 사용할 수 있는 명령 체계를 전달하게 된다.
+
 <img src="{{ site.url }}/images/persu/zz8.png" style="display: block; margin: auto;">
 
 이후에는 Master가 HomeID, NodeID 에 맞게 명령을 수행하게 된다.
