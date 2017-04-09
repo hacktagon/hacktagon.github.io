@@ -10,14 +10,12 @@ featured: true
 
 
 # Wireless Protocol 802.11 Analysis
-<br>
-- 유선으로 이루어진 과거 네트워크 시스템에는 기기간의 유선의 한계를 뛰어넘기 위해 무선 기술이 개발되었고, 그에 따라 개발된 근거리 통신망을 구축하기 위한 무선 네트워크에 대한 표준이 802.11 규격이다.
+<br>- 유선으로 이루어진 과거 네트워크 시스템에는 기기간의 유선의 한계를 뛰어넘기 위해 무선 기술이 개발되었고, 그에 따라 개발된 근거리 통신망을 구축하기 위한 무선 네트워크에 대한 표준이 802.11 규격이다.
 
 
 
 ## 1. 이동통신(LTE, 3G) vs 무선프로토콜(Wi-Fi)
-<br>
-- 이동통신은 무선 프로토콜은 동일한 무선 통신을 하지만 왜 나눠서 구별을 할까 ?
+<br>- 이동통신은 무선 프로토콜은 동일한 무선 통신을 하지만 왜 나눠서 구별을 할까 ?
 
 이유는 이동성(Mobility) 에 이유가 있다. 무선 프로토콜 제작 당시에는 무선 기기 들의 동작 반경은 한 사무실 내에 정도였지만 이동통신은 휴대전화가 생기면서 발전하였고 통화 중인 사용자는 기지국 내 반경 (Cell) 을 벗어 나더라도 통화를 유지해야하기 때문에 (이러한 기술을 Hand off / Hand over 이라고 한다.) 이동통신을 구성하는 프로토콜 스택 구조가 복잡하게 된다.
 
@@ -28,9 +26,7 @@ featured: true
 <img src="{{ site.url }}/images/persu/0.jpg" style="display: block; margin: auto;">
 
 ## 2. 802.11 무선 프로토콜 용어
-
-
-네트워크 구축 방식에는 Infra structured, non-infra structured 방식이 있다. 아래 그림만 봐도 알 수 있듯이 구조적인 특징을 가지고 있는 방식이 infra 구조 방식이지만 ad-hoc 같이 무선 디바이스 간의 통신을 하는 구조를 non-infra 구조 방식이라고 한다.
+<br>네트워크 구축 방식에는 Infra structured, non-infra structured 방식이 있다. 아래 그림만 봐도 알 수 있듯이 구조적인 특징을 가지고 있는 방식이 infra 구조 방식이지만 ad-hoc 같이 무선 디바이스 간의 통신을 하는 구조를 non-infra 구조 방식이라고 한다.
 
 <img src="{{ site.url }}/images/persu/1.jpg" style="display: block; margin: auto;">
 
