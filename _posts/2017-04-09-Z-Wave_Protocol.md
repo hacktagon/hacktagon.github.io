@@ -14,7 +14,7 @@ featured: true
 
 Wireless IoT Protocol으로 저전력, 저대역폭을 지원하여, IoT 디바이스를 제어하기 위한 무선 프로토콜
 
-<img src="{{ site.url }}/images/persu/zz4.jpg" style="display: block; margin: auto;">
+<img src="{{ site.url }}/images/persu/zz4.png" style="display: block; margin: auto;">
 
 
 ### Z-Wave 규격 및 특징
@@ -55,13 +55,13 @@ RF 계층은 네트워크 데이터를 신호화 시키는 계층으로 GFSK, FS
 항상 하나의 특정 노드로 데이터를 전송하는 방식이며, 수신되었다고 프레임이 인정된다.
 singlecast의 프레임 전송이 제대로 이루어 지지 않았을 경우 재전송한다. 이는 ACK 신호를 수신하는데 걸리는 시간을 통해 재전송 여부를 판단하게 된다.
 
-<img src="{{ site.url }}/images/persu/z1.jpg" style="display: block; margin: auto;">
+<img src="{{ site.url }}/images/persu/z1.png" style="display: block; margin: auto;">
 
 - Transfer Acknowledge Frame Type
 
 Singlecast에 대한 응답을 가지는 신호
 
-<img src="{{ site.url }}/images/persu/z2.jpg" style="display: block; margin: auto;">
+<img src="{{ site.url }}/images/persu/z2.png" style="display: block; margin: auto;">
 
 - Multicatst Frame Type
 1 ~ 232 노드에 프레임을 송신하는 프레임 타입
@@ -77,12 +77,12 @@ Flow방식으로 노드가 다른 노드에게 프레임을 넘기면서 확인 
 - Routed Acknowledge Frame Type
 페이로드가 없는 라우팅일 경우 singlecast로 전송된다.
 
-<img src="{{ site.url }}/images/persu/z3.jpg" style="display: block; margin: auto;">
+<img src="{{ site.url }}/images/persu/z3.png" style="display: block; margin: auto;">
 
 - Routing Table
 컨트롤러는 네트워크 토폴로지에 대한 노드의 정보를 유지하는 위치 라우팅 테이블을 가진다.
 
-<img src="{{ site.url }}/images/persu/z4.jpg" style="display: block; margin: auto;">
+<img src="{{ site.url }}/images/persu/z4.png" style="display: block; margin: auto;">
 
 - Route to Node
 Routing을 하기 위해서는 노드의 정보를 얻고, 최적의 라우트 프로토콜을 사용해야하는데 이에 관한 문제점을 가지고 있다.
@@ -97,7 +97,7 @@ Routing을 하기 위해서는 노드의 정보를 얻고, 최적의 라우트 �
 
 Application은 해당 IoT의 기능을 나타나며 거기에 들어가는 Value값은 Command parameter로 구성한다.
 
-<img src="{{ site.url }}/images/persu/z5.jpg" style="display: block; margin: auto;">
+<img src="{{ site.url }}/images/persu/z5.png" style="display: block; margin: auto;">
 
 ## 2. Z-Wave 구성
 Z-Wave는 Controller과 Slave 두개로 구성
@@ -124,15 +124,15 @@ Z-Wave는 Controller과 Slave 두개로 구성
 Z-Wave 동작과정은 HomeID 를 가지고 있는 Master가 slave에게 HomeID, NodeID를 부여하는 Pairing 과정에서 부터 시작된다.
 
 아래 그림과 같이 Master는 Slave를 찾기 위해 Broadcast를 통해 자신을 알리게 된다.
-<img src="{{ site.url }}/images/persu/zz5.jpg" style="display: block; margin: auto;">
+<img src="{{ site.url }}/images/persu/zz5.png" style="display: block; margin: auto;">
 
 이후 Pairing 대상인 Slave는 여기서 응답을 주게 된다.
-<img src="{{ site.url }}/images/persu/zz6.jpg" style="display: block; margin: auto;">
+<img src="{{ site.url }}/images/persu/zz6.png" style="display: block; margin: auto;">
 
 Master는 HomeID에 관한 NodeID를 부여하게 되는데, 이로써 Slave는 HomeID를 가진 디바이스간 통신을 할 수 있다.
-<img src="{{ site.url }}/images/persu/zz7.jpg" style="display: block; margin: auto;">
+<img src="{{ site.url }}/images/persu/zz7.png" style="display: block; margin: auto;">
 
 이런 연결 과정이 끝나게 되면, Slave는 Master에게 자신의 정보를 전달하게 되고 Slave가 사용할 수 있는 명령 체계를 전달하게 된다.
-<img src="{{ site.url }}/images/persu/zz8.jpg" style="display: block; margin: auto;">
+<img src="{{ site.url }}/images/persu/zz8.png" style="display: block; margin: auto;">
 
 이후에는 Master가 HomeID, NodeID 에 맞게 명령을 수행하게 된다.
