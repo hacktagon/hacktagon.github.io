@@ -10,12 +10,12 @@ featured: true
 
 
 # Wireless Protocol 802.11 Analysis
-<br>- 유선으로 이루어진 과거 네트워크 시스템에는 기기간의 유선의 한계를 뛰어넘기 위해 무선 기술이 개발되었고, 그에 따라 개발된 근거리 통신망을 구축하기 위한 무선 네트워크에 대한 표준이 802.11 규격이다.
+- 유선으로 이루어진 과거 네트워크 시스템에는 기기간의 유선의 한계를 뛰어넘기 위해 무선 기술이 개발되었고, 그에 따라 개발된 근거리 통신망을 구축하기 위한 무선 네트워크에 대한 표준이 802.11 규격이다.
 
 
 
 ## 1. 이동통신(LTE, 3G) vs 무선프로토콜(Wi-Fi)
-<br>- 이동통신은 무선 프로토콜은 동일한 무선 통신을 하지만 왜 나눠서 구별을 할까 ?
+- 이동통신은 무선 프로토콜은 동일한 무선 통신을 하지만 왜 나눠서 구별을 할까 ?
 
 이유는 이동성(Mobility) 에 이유가 있다. 무선 프로토콜 제작 당시에는 무선 기기 들의 동작 반경은 한 사무실 내에 정도였지만 이동통신은 휴대전화가 생기면서 발전하였고 통화 중인 사용자는 기지국 내 반경 (Cell) 을 벗어 나더라도 통화를 유지해야하기 때문에 (이러한 기술을 Hand off / Hand over 이라고 한다.) 이동통신을 구성하는 프로토콜 스택 구조가 복잡하게 된다.
 
@@ -36,20 +36,20 @@ AP 방식은 무선 기기들을 인터넷 통신을 하기 위해 Gateway 역�
 
 
 ## 3. CSMA/CA (Carrier-sense Multi-access with / Collision Avoidance)
-<br>
+
 버스 구조의 이더넷 방식은 한 PC 가 데이터 전송시 같은 네트워크에 있는 PC들은 통신을 하지 않는다. 네트워크의 신호를 통해 '아 다른 PC가 사용 중이구나' 라고 알 수 있기 때문이다. 하지만 두 PC 가 우연하게도 동시에 신호 전송을 발생 시키면 어느 한 부분에서 충돌하여 잡음이 되어 두 PC는 서로 다른 시간 값을 가지고 우선 순위를 기다리게 된다. 이러한 방식을 CSMA/CD (D : Detect) 이라고 한다. 즉 서로 충돌하는 신호를 통해 판단을 할 수 있다는 것이다.
-<br>
+<br><br>
 하지만 무선에는 D 가 아닌 A 를 쓴다. 회피인 것이다. 이 CSMA/CA 방식은 4 단계로 구성 되는데
 <br>
 1. 첫 번째 동작
 - 송신단 -> 수신단 RTS(Request to send)
-<br>
+<br><br>
 2. 두 번째 동작
 - 송신단 <- 수신단 CTS(Clear to send)
-<br>
+<br><br>
 3. 세 번째 동작
 - 송신단 -> 수신단 Data 전송
-<br>
+<br><br>
 4. 네 번째 동작
 - 송신단 -> 수신단 ACK
 
@@ -65,11 +65,11 @@ AP 방식은 무선 기기들을 인터넷 통신을 하기 위해 Gateway 역�
 <br>
 1. 첫 번째 동작 : Beacon Frme Broad cast
 - Station <- AP Beacon Frame
-<br>
+<br><br>
 2. 두 번째 동작 : Auth
 - Station -> AP Authentication Request
 - Station <- AP Authentication Response
-<br>
+<br><br>
 3. 세 번째 동작 : Association
 - Station -> AP Association Request
 - Station <- AP Association Response
@@ -83,17 +83,15 @@ if 데이터를 전송 후 응답이 오기 전에 연결된 AP와 멀어져 다
 이러한 경우에는 응답 메세지는 드롭이 되며 Station 은 다른 AP 와의 통신을 통해 다시 데이터를 목적지에게 전송하게 된다.
 
 ### 4.2 Active mode
-
+<br><br>
 1. 첫 번째 동작 : Probe 메세지
 - Station -> Probe Request
 - Station <- Probe Response
-
-
-
+<br><br>
 2. 두 번째 동작 : Auth
 - Station -> AP Authentication Request
 - Station <- AP Authentication Response
-
+<br><br>
 3. 세 번째 동작 : Association
 - Station -> AP Association Request
 - Station <- AP Association Response
