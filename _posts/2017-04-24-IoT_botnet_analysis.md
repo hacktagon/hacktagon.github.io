@@ -1,9 +1,9 @@
 ---
 layout: post
-title:  "IoT Botnet Mirai_Bot vs Bricker_Bot"
+title:  "IoT Botnet Bricker_Bot"
 tag:   Analysis
 categories: IoT Analysis bot persu
-modified: 2017-04-09
+modified: 2017-04-26
 comments: true
 featured: true
 ---
@@ -87,8 +87,6 @@ PDos의 가장 큰 목적인 장치 손상은 Linux shell code를 실행 시켜 
 전 세계적으로 한번에 333 여곳에서 PDoS를 발생시켰어며, 다음 명령 수행을 하는 bricker_bot version 2는 아래와 같다.
 
 <img src="{{ site.url }}/images/persu/brickerbot2.jpg" style="display: block; margin: auto;">
-
-<img src="{{ site.url }}/images/persu/brickerbot3.jpg" style="display: block; margin: auto;">
 
 rm -rf 를 통해 모든 장치를 지워버리며, TCP timestamps 비활성화, 커널 스레드 최대수 1 뿐 만 아니라 iptables를 초기화 하며 NAT 규칙까지 삭제하고 out-bound packet을 차단하게 되어 네트워크 통신이 이뤄지지 않도록 구성한다.
 
