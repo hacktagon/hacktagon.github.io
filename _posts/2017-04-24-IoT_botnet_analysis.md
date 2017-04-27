@@ -12,6 +12,7 @@ featured: true
 
 
 본 글은 최근 이슈가 되고 있는 IoT Botnet인 Bricker에 대해 조사해 보았다.
+원문(Reference) : https://security.radware.com/ddos-threats-attacks/brickerbot-pdos-permanent-denial-of-service/
 
 - Botnet : https://ko.wikipedia.org/wiki/%EB%B4%87%EB%84%B7
 
