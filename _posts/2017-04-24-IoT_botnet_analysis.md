@@ -7,9 +7,9 @@ modified: 2017-04-26
 comments: true
 featured: true
 ---
-## Mirai Botnet
+# Mirai Botnet
 
-원문(Reference) : https://security.radware.com/ddos-threats-attacks/threat-advisories-attack-reports/mirai-botnet/
+- 원문(Reference) : https://security.radware.com/ddos-threats-attacks/threat-advisories-attack-reports/mirai-botnet/
 
 Mirai Botnet은 대규모 DDoS 공격을 3건 발생 시켰으며, 강력하고 정교한 방식으로 DDos를 발생 시킨다.
 
@@ -159,7 +159,7 @@ Telnet, SSH, HTTP Kill : https://github.com/jgamblin/Mirai-Source-Code/blob/mast
 ### 6. Command & Control
 C&C 서버는 활성화된 Telnet, SSH 포트를 통해 명령을 전송하게 된다.
 
-기본적으로 TCP SYN, ACK Flooding과 같은 기본적인 DDoS 공격 벡터 뿐만 아니라새롭게 발견되고 있는 GRE IP, Ethernet Flooding 또한 공격 벡터에 가지고 있다. DDoS 탐지 기법을 우회하는 공격 벡터까지 구성된다.
+기본적으로 TCP SYN, ACK Flooding과 같은 기본적인 DDoS 공격 벡터 뿐만 아니라 새롭게 발견되고 있는 GRE IP, Ethernet Flooding 또한 공격 벡터에 가지고 있다. DDoS 탐지 기법을 우회하는 공격 벡터까지 구성된다.
 
 - DDoS vector : https://github.com/jgamblin/Mirai-Source-Code/blob/master/mirai/bot/attack.h
 
@@ -178,7 +178,9 @@ C&C 서버는 활성화된 Telnet, SSH 포트를 통해 명령을 전송하게 �
 ```
 
 
-## Bricker botnet
+
+
+# Bricker botnet
 
 
 본 글은 최근 이슈가 되고 있는 IoT Botnet인 Bricker에 대해 조사해 보았다.
