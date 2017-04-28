@@ -178,10 +178,12 @@ C&C 서버는 활성화된 Telnet, SSH 포트를 통해 명령을 전송하게 �
 #define ATK_VEC_HTTP       10 /* HTTP layer 7 flood */
 ```
 
+
 # Bricker botnet
 
 
 본 글은 최근 이슈가 되고 있는 IoT Botnet인 Bricker에 대해 조사해 보았다.
+
 원문(Reference) : https://security.radware.com/ddos-threats-attacks/brickerbot-pdos-permanent-denial-of-service/
 
 - Botnet : https://ko.wikipedia.org/wiki/%EB%B4%87%EB%84%B7
@@ -234,7 +236,7 @@ Telnet brute force 방식에 사용되었던 자체 DB는 아래 소스 코드�
 
 기본적인 Telnet 을 구성하기 위해 TCP/IP Protocol Header을 구성하고, add_auth_entry에 있는 IoT 디바이스의 초기 계정을 접근하게 구성하였다.
 
-"Telnet brute force"를 통해 시스템에 접근하게 되면(shell 접근을 의미) 먼저 장치 손상(Corrupting a Device)을 입히게 됩니다.
+"Telnet brute force"를 통해 시스템에 접근하게 되면(shell 접근을 의미) 먼저 장치 손상(Corrupting a Device)을 입히게 된다.
 
 ### Corrupting a Device
 
