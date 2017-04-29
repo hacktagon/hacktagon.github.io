@@ -18,7 +18,7 @@ featured: true
 4. 0-day Attack이 비교적 쉬우므로 빠른 감염이 가능
 
 
-# Mirai Botnet
+# 1. Mirai Botnet
 
 - 원문(Reference) : https://security.radware.com/ddos-threats-attacks/threat-advisories-attack-reports/mirai-botnet/
 
@@ -27,14 +27,14 @@ Mirai Botnet은 대규모 DDoS 공격을 3건 발생시켰으며, 강력하고 �
 Mirai Botnet은 1TB 급 트래픽 발생을 통해 공격 서비스 거부시킬 수 있으며, 공격 방식은 미리 정의된 10가지 벡터가 존재한다.
 그중 GRE Flood, TCP STOMP, Water Torture, DNS Query 호출과 같은 공격 벡터가 존재하게 된다.
 
-## Target
+## 1.1 Target
 일차적으로 공격 대상은 공인 망에 23번 Telnet 포트가 오픈된 IoT Device이다. 그중 mirai botnet은 auth_entry에 존재하는 디폴트 계정을 가진 IoT Device가 대상이며, 더 나아가 dropbear SSH 와 같이 22번 포트가 오픈된 IoT Device 또한 공격의 대상이 되기도 한다.
 
-## Mirai botnet 동작과정
+## 1.2 Mirai botnet 동작과정
 
 - 구현을 통한 분석 : https://www.rsaconference.com/writable/presentations/file_upload/hta-w10-mirai-and-iot-botnet-analysis.pdf
 
-### 1. brute force을 통한 IoT Device 접근
+### 1.1.1 brute force을 통한 IoT Device 접근
 
 Mirai Botnet은 기본적으로 공인 IP를 가진 IoT Device에 SSH, Telnet 포트와 같이 원격에서 시스템에 접근 가능한 서비스를 스캔하게 되고 오픈된 서비스에 대해서 미리 정의된 디폴트 계정을 brute force 공격을 하게 된다.
 
@@ -107,13 +107,13 @@ Mirai Botnet은 기본적으로 공인 IP를 가진 IoT Device에 SSH, Telnet �
 
 위 내용을 통해 다양한 디폴트 계정을 가지고 있는 것을 알 수 있다.
 
-### 2. Find CPU info
+### 1.1.2 Find CPU info
 
 위 디폴트 계정을 통해 shell에 접근하게 되면, Botnet을 생성하기 위해 CPU 버전을 아래 그림과 같이 확인하게 된다. MIPS, ARM, x86 etc...
 
 <img src="{{ site.url }}/images/persu/mirai.png" style="display: block; margin: auto;">
 
-### 3. Mirai Botnet Download
+### 1.1.3 Mirai Botnet Download
 1, 2 번 단계를 거치게 되면 실제로 Botnet을 내려받게 되는데 /bin/busybox 에서 wget, tftp, ECCHI 명령어가 실행되는지 찾게 된다.
 
 <img src="{{ site.url }}/images/persu/mirai0.png" style="display: block; margin: auto;">
@@ -122,12 +122,12 @@ Mirai Botnet은 기본적으로 공인 IP를 가진 IoT Device에 SSH, Telnet �
 
 <img src="{{ site.url }}/images/persu/mirai1.png" style="display: block; margin: auto;">
 
-### 4. Start Mirai Botnet
+### 1.1.4 Start Mirai Botnet
 3번 과정을 통해 Mirai Botnet을 내려받은 이후에는 실행하게 된다.
 
 <img src="{{ site.url }}/images/persu/mirai2.png" style="display: block; margin: auto;">
 
-### 5. Port Kill & restart
+### 1.1.5 Port Kill & restart
 Mirai botnet이 실행하면 처음 기존에 활성화 되었던 Telnet, SSH, HTTP 서비스를 kill 후 restart를 한다.
 
 Telnet, SSH, HTTP Kill : https://github.com/jgamblin/Mirai-Source-Code/blob/master/mirai/bot/killer.c
@@ -161,7 +161,7 @@ Telnet, SSH, HTTP Kill : https://github.com/jgamblin/Mirai-Source-Code/blob/mast
 #endif
 ```
 
-### 6. Command & Control
+### 1.1.6 Command & Control
 C&C 서버는 활성화된 Telnet, SSH 포트를 통해 명령을 전송하게 된다.
 
 기본적으로 TCP SYN, ACK Flooding과 같은 기본적인 DDoS 공격 벡터뿐만 아니라 새롭게 발견되고 있는 GRE IP, Ethernet Flooding 또한 공격 벡터에 가지고 있다. DDoS 탐지 기법을 우회하는 공격 벡터까지 구성된다.
@@ -182,10 +182,10 @@ C&C 서버는 활성화된 Telnet, SSH 포트를 통해 명령을 전송하게 �
 #define ATK_VEC_HTTP       10 /* HTTP layer 7 flood */
 ```
 
-## Protecting
+## 1.2 Protecting
 mirai botnet은 알려진 디폴트 계정을 통해 시스템에 접근하게 되는 것이다. 원천적인 보안 방법은 Telnet, SSH 와 같은 원격 관리 서비스를 공인 IP에 오픈하지 않는 것이 중요하며, 제조사는 각 디바이스별 강력한 비밀번호 정책을 적용한 유니크한 디폴트 계정을 통해 단말을 관리해야 한다.
 
-# Bricker Botnet
+# 2. Bricker Botnet
 
 - 원문 : https://security.radware.com/ddos-threats-attacks/brickerbot-pdos-permanent-denial-of-service/
 https://security.radware.com/ddos-threats-attacks/brickerbot-pdos-back-with-vengeance/
@@ -198,13 +198,13 @@ IoT 시대에서 많은 Device가 점차 인터넷을 사용하게 되는 초연
 
 1,895 건의 PDoS 공격을 일으킨 Bricker_Botnet은 최초 두 차례 공격 시도를 하였으며, C&C 서버는 TOR Node에 의해 발견되지 않았다.
 
-## Target
+## 2.1 Target
 일차적으로 공격 대상은 공인 망에 23번 Telnet 포트된 IoT Device다. 그 중 Mirai_Bot에 존재하는 auth_entry에 존재하는 디폴트 계정을 가진 IoT Device 이며, 더 나아가 dropbear SSH 와 같이 22번 포트가 오픈되어 있는 IoT Device 또한 공격의 대상이 되기도 한다.
 
 
-## Bricker Botnet 동작 과정
+## 2.2 Bricker Botnet 동작 과정
 
-### 1. brute force을 통한 IoT Device 접근
+### 2.2.1 brute force을 통한 IoT Device 접근
 Bricker_Bot의 공격 방식은 "Telnet brute force" 에서 부터 시작된다. Telnet brute force은 Mirai에서 사용된 것과 같은 공격 방식이며, 아래 github에서 내용을 확인할 수 있다.
 
 - Mirai code : https://github.com/jgamblin/Mirai-Source-Code
@@ -247,10 +247,10 @@ Telnet brute force 방식에 사용되었던 auth_entry는 아래 소스 코드�
 
 "Telnet brute force"를 통해 시스템에 접근하게 되면(shell 접근을 의미) 장치 손상(Corrupting a Device)을 입히게 된다.
 
-### 2. linux command를 통한 PDos
+### 2.2.2 linux command를 통한 PDos
 시스템에 접근하게 되면 botnet은 linux command를 통해 시스템을 마비시키게 되는데, bricker botnet 공격 4번 중 각각 다른 linux command를 통해 PDoS를 발생시켰다.
 
-#### BrickerBot.1
+#### 2.2.2.1 BrickerBot.1
 
 PDos의 가장 큰 목적인 장치 손상은 Linux shell command를 실행 시켜 인터넷 연결, 장치 성능이 정의된 파일을 지우는 명령을 수행한다.
 
@@ -264,7 +264,7 @@ PDos의 가장 큰 목적인 장치 손상은 Linux shell command를 실행 시�
 
 이렇게 되면 저장매체에 있는 데이터는 임의의 값으로 초기화가 될 것이며, 네트워크 통신 또한 이뤄지지 않게 된다.
 
-#### BrickerBot.2
+#### 2.2.2.2 BrickerBot.2
 
 전 세계적으로 한 번에 333 여 곳에서 PDoS를 발생시킨, 다음 명령 수행을 하는 bricker_bot.2는 아래와 같다.
 
@@ -272,18 +272,18 @@ PDos의 가장 큰 목적인 장치 손상은 Linux shell command를 실행 시�
 
 rm -rf 를 통해 모든 장치를 지워버리며, TCP timestamps 비활성화, 커널 스레드 최대 수 1로 지정하며 iptables를 초기화하며 NAT 규칙까지 삭제하고 out-bound packet을 차단하게 되어 네트워크 통신이 이뤄지지 않도록 구성한다.
 
-#### BrickerBot.3
+#### 2.2.2.3 BrickerBot.3
 
 <img src="{{ site.url }}/images/persu/brickerbot4.png" style="display: block; margin: auto;">
 
 BrickerBot.3은 기존의 BrickerBot.1의 "fdisk -l" 명령어가 삭제되었으며 랜덤한 값으로 덮어 쓰이는 저장 매체의 수가 증가하였다.
 
-#### BrickerBot.4
+#### 2.2.2.4 BrickerBot.4
 <img src="{{ site.url }}/images/persu/brickerbot5.png" style="display: block; margin: auto;">
 
 BrickerBot.4은 BrickerBot.1과 거의 같은 명령을 수행한다.
 
-### Timeline
+## 2.3 Timeline
 최초 두 PDoS 공격은 같은 날과 거의 같은 시간에 시작되었다.
 - 2017년 3월 20일 9.51 PM : 첫 번째 PDoS 공격은 BrickerBot.1을 통해 발생 후 종료
 - 2017년 3월 20일 9.10 PM : TOR 노드를 사용하여 PDoS 공격이 BrickerBot.2을 통해 지속해서 발생
@@ -292,11 +292,11 @@ BrickerBot.4은 BrickerBot.1과 거의 같은 명령을 수행한다.
 - 2017년 4월 21일 12.00 PM : Dropbear SSH server (SSH-2.0-dropbear_0.51, 2013.58, 2014.63) 대상으로 12시간 동안 1118회의 BrickerBot.3 발생
 - 2017년 4월 21일 5.22 PM - 8.44 PM : 약 90회 정도 단일 장치에서만 일어났으며, 그 중 Dropbear SSH server (SSH-2.0-dropbear_2014.63) 버전이 다수 사용한 BrickerBot.4 발생
 
-### Protecting
+## 2.4 Protecting
 BrickerBot 감염을 막기 위해서는 가장 기본적인 대응방안이 필요하다. 각 Device는 Telnet, SSH와 같은 원격 단말 관리 서비스를 비활성화시켜야 하며, 필요 때문에 활성화 시킬 경우 각 Device 별로 유니크한 패스워드 정책을 수립해야 한다. 특히 SSH 사용 시 로그인 방식이 아닌 키교환을 통해 로그인할 수 있도록 구성해야 한다.
 
 
-# Hajime Botnet
+# 3. Hajime Botnet
 
 원문 : http://researchcenter.paloaltonetworks.com/2017/04/unit42-new-iotlinux-malware-targets-dvrs-forms-botnet/
 
@@ -306,11 +306,11 @@ BrickerBot 감염을 막기 위해서는 가장 기본적인 대응방안이 필
 
 대부분 공격 대상은 웹캠, DVR으로 나타나고 있다. 국가별 통계는 베트남 20%, 대만 13%, 브라질 9% 정도로 나타나고 있다.
 
-## Hajime botnet 동작 과정
+## 3.1 Hajime botnet 동작 과정
 
 원문 : https://security.rapiditynetworks.com/publications/2016-10-16/hajime.pdf
 
-### 1. 정찰
+### 3.1.1 정찰
 정찰 부분은 실제로 botnet이 감염된 것은 아니며, 실제 공격을 수행하는 attcking node가 무작위로 ipv4 대역 대의 23번 텔넷 포트를 스캔하게 된다.
 이후 텔넷 오픈된 것을 확인하면 attacking node가 가지고 있는 알려진 디폴트 ID/PW를 대입하게 된다.
 
@@ -328,7 +328,7 @@ sh
 
 위 명령 중 enable, system, shell, sh 4가지 명령은 shell을 실행시키기 위함이며, 마지막 /bin/busybox ECCHI를 통해 shell이 잘 실행되는지 파악하게 된다. 성공적인 shell 접근을 하기 위해 에러를 발생하는 것이며, mirai의 변형임을 나타나는 부분이기도 하다.
 
-### 2. 침투
+### 3.1.2 침투
 정상적으로 IoT Device에 접근하게 되면 아래 명령을 실행하여 현재 시스템 마운트 상황을 확인하게 된다.
 
 ```
@@ -363,7 +363,7 @@ ECCHI: applet not found
 2. 해당 디렉터리의 쓰기 가능 여부 확인
 3. .s 바이너리를 생성함으로써 대상 IoT Device의 프로세서 결정
 
-### 3. 1차 감염 : shell code 생성
+### 3.1.3 1차 감염 : shell code 생성
 침투 단계에서 이상이 없을 시 hajime botnet을 생성하게 된다.
 ```
 # echo -ne "\x7f\x45\x4c\x46\x01\x01\x01\x00\x00\x00\x00\x00\x00\x00\x00\x00\x02\x00\x28\x00\x01\x00\x00\x00\x54\x00\x01\x00\x34\x00\x00\x00\x44\x01\x00\x00\x00\x02\x00\x05\x34\x00\x20\x00\x01\x00\x28\x00\x04\x00\x03\x00\x01\x00\x00\x00\x00\x00\x00\x00\x00\x00\x01\x00" > .s; /bin/busybox ECCHI
@@ -395,7 +395,7 @@ ARM 프로세서는 공부 중에 있어 완벽하게 이해를 못 한 상황�
 
 hajime botnet hash : https://github.com/Psychotropos/hajime_hashes
 
-### 4. 2차 감염 : DHT Downloader
+### 3.1.4 2차 감염 : DHT Downloader
 이 단계는 1차 감염 시 생성되었던 .i 바이너리가 P2P 네트워크에서 payload를 검색하고 명령을 수행하는 바이너리를 내려받고 실행하는 단계이다.
 
 Hajime는 피어 검색 및 uTP(데이터 교환) 위해 BitTorrent의 DHT 프로토콜을 사용한다.
@@ -413,7 +413,7 @@ Hajime는 피어 검색 및 uTP(데이터 교환) 위해 BitTorrent의 DHT 프�
 prctl (PR_SET_NAME,argv [0]) syscall. 을 통해 프로세스의 argv [0]에 "telnetd"문자열로 변환 -> 자신을 telent으로 속이기 위함 (.p / .d 프로세스가 telnet으로 변환)
 ```
 
-### 5. 실행
+### 3.1.5 실행
 
 피어로부터 가장 최신의 설정 파일을 내려받기 위해 설정
 BitTorrent DHT의 피어 조회 시 Torrent 메타 데이터의 SHA1 해시값을 생성하기 위해 160 비트 "info_hash" 값을 생성한다.
@@ -449,14 +449,14 @@ info_hash를 가진 피어에 도달한 설정 파일의 모듈(바이너리)과
 
 실행 중인 모듈에 대해서는 .p/.d에 설정파일을 저장하며, 새로운 바이너리를 .i로 압축 해제하여 execv를 이용해 실행하게 된다.
 
-### 6. 전파
+### 3.1.6 전파
 
 exp 모듈(바이너리)의 다른 IoT Device에 Telnet brute force를 통해 hajime botnet을 전파하는 역할이다.
 
 
-## Protecting
+## 3.2 Protecting
 
-### 1. Block UDP packets containing P2P traffic
+### 3.2.1 Block UDP packets containing P2P traffic
 hajime botnet은 기본적으로 UDP 기반의 P2P 프로토콜을 사용하는 것이다. 이때 사용되는 주요 메시지를 차단하는 방법이다.
 
 ```
@@ -465,20 +465,20 @@ a9 97 99 dd 38 49 58 72 84 90 fa c7 d1 31 82 05
 2d 88 4e 6e 42 84
 ```
 
-### 2. Block TCP connections containing attack traffic
+### 3.2.2 Block TCP connections containing attack traffic
 "/bin/busybox ECCHI" 명령 사용은 mirai, hajime의 공통점이다. 해당 문자열이 포함된 패킷을 차단하거나 감염 의심해야 한다.
 
-### 3. Block TCP port
+### 3.2.3 Block TCP port
 1차 감염이후 2차 감염을 위해 파일을 내려받는 port는 4636으로 정해져 있다. blacklist 방식으로 port 차단하는 것은 좋은 방법은 아니지만, 이 방법 또한 하나의 대응방안이 될 수 있다.
 
-## Hajime botnet 목적
+## 3.3 Hajime botnet 목적
 hajime botnet의 목적은 대량의 IoT Device를 감염시켜 DDoS에 사용하기 위함이 기본이다.
 하지만 mirai와 같이 오픈소스화 되지 않아 공격자가 정의한 페이로드에 따라 다양한 목적에 사용될 것이다.
 
-## Hajime와 mirai의 관계
+## 3.4 Hajime와 mirai의 관계
 Hajime는 mirai와 최초 Device 접근 부분이 Telnet을 사용하고 있고 명령 수행 시 ECCHI를 사용하지만 동작 과정은 botnet의 한 종류인 qbot과 많이 유사하다. mirai의 변종으로 속이기 위한 수단이 아닐까 한다.
 
-# Amnesia botnet
+# 4. Amnesia botnet
 
 원문 : http://researchcenter.paloaltonetworks.com/2017/04/unit42-new-iotlinux-malware-targets-dvrs-forms-botnet/
 
@@ -490,19 +490,19 @@ Amnesia botnet은 취약한 시스템을 검색하여 RCE(Remote code execution)
 
 - Remote Code Execution in CCTV-DVR affecting over 70 different vendors : http://www.kerneronsec.com/2016/02/remote-code-execution-in-cctv-dvrs-of.html
 
-## Amnesia botnet 동작 과정
+## 4.1 Amnesia botnet 동작 과정
 
-### 1. 감염
+### 4.1.1 감염
 감염 단계에서는 위 취약점을 이용해 DVR Device를 감염 시키게 된다.
 
-### 2. 제어
+### 4.1.2 제어
 감염된 DVR Device는 IRC 프로토콜을 이용하여 C2 서버와 통신을 하게 된다. 아래 그림처럼 다양한 DDoS 유형을 공격할 수 있게 설계되었다.
 
 <img src="{{ site.url }}/images/persu/Amnesia_2.png" style="display: block; margin: auto;">
 
 DDoS 명령뿐만 아니라 감염된 botnet을 제어할 수 있는 명령어까지 구성된 것을 알 수 있다.
 
-### 3. 전파
+### 4.1.3 전파
 
 추가로 CCTVSCANNER 및 CCTVPROCS라는 두 가지 명령이 발견되었는데 이 명령은 TVT Digital DVR의 RCE 취약점을 검색하고 악용하는 데 사용된다.
 
@@ -539,7 +539,7 @@ uid=501(persu) gid=20(staff)
 
 <img src="{{ site.url }}/images/persu/Amnesia_4.png" style="display: block; margin: auto;">
 
-## Amnesia botnet Anti-Forensics
+## 4.2 Amnesia botnet Anti-Forensics
 Amnesia botnet이 실제로 DVR Device에서 실행 시 /sys/class/dmi/id/product_name과 /sys/class/dmi/id/sys_vendor 두 파일을 확인하게 된다. 두 파일을 읽어 가상환경인지 확인하게 되는데 실제로 vmware환경에서 ubuntu 설치 후 두 파일 확인 시 가상환경임을 알 수 있는 메시지가 출력되었다.
 
 ```
@@ -577,5 +577,5 @@ VMware, Inc.
 - surrealzxc.co[.]za
 - inversefierceapplied[.]pw
 
-## Protecting
+## 4.3 Protecting
 Amnesia botnet의 경우 DVR Device가 가지고 있는 RCE 취약점을 이용한 공격이기 때문에 해당 취약점에 대해 제조사가 업데이트를 제공하는 것이 먼저 되어야 하며, 특정 시스템을 파악할 수 있는 메시지인 "Cross web server"처럼 노출되지 않도록 개발 단계에서부터 시스템을 구성해야 한다.
