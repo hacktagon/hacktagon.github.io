@@ -263,12 +263,12 @@ rm -rf 를 통해 모든 장치를 지워버리며, TCP timestamps 비활성화,
 
 ### BrickerBot.3
 
-<img src="{{ site.url }}/images/persu/brickerbot4.jpg" style="display: block; margin: auto;">
+<img src="{{ site.url }}/images/persu/brickerbot4.png" style="display: block; margin: auto;">
 
 BrickerBot.3은 기존의 BrickerBot.1의 "fdisk -l" 명령어가 삭제되었으며 랜덤한 값으로 덮어 쓰여지는 저장 매체의 수가 증가하였다.
 
 ### BrickerBot.4
-<img src="{{ site.url }}/images/persu/brickerbot5.jpg" style="display: block; margin: auto;">
+<img src="{{ site.url }}/images/persu/brickerbot5.png" style="display: block; margin: auto;">
 
 BrickerBot.4은 1과 거의 동일한 명령을 수행한다.
 
