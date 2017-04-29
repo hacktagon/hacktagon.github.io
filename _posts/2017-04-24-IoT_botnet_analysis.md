@@ -10,6 +10,15 @@ featured: true
 
 해당 글은 IoT botnet의 종류에 대해 서베이한 내용입니다. 자세한 내용은 원문을 참고해 주시길 바랍니다.
 
+# 개요
+
+### IoT Device가 DDoS Botnet 으로  매력적인 이유
+1. EndPoint 보안의 부재
+2. IoT Device의 안전 및 보안에 관한 규정이나 표준이 부재하여 기본 암호 정책, 액세스 제어 권한, 보안 구성과 같은 설정이 미흡
+3. 24시간 * 365일 사용이 가능
+4. 0-day Attack이 비교적 쉽기 때문에 빠른 감염이 가능
+
+
 # Mirai Botnet
 
 - 원문(Reference) : https://security.radware.com/ddos-threats-attacks/threat-advisories-attack-reports/mirai-botnet/
@@ -18,15 +27,6 @@ Mirai Botnet은 대규모 DDoS 공격을 3건 발생 시켰으며, 강력하고 
 
 Mirai Botnet은 1TB 급 트래픽 발생을 통해 공격 서비스 거부 시킬 수 있으며, 공격 방식은 미리 정의된 10가지 벡터가 존재한다.
 그 중 GRE Flood, TCP STOMP, Water Torture, DNS Query 호출과 같은 공격 벡터가 존재하게 된다.
-
-### IoT Device가 DDoS Botnet 으로  매력적인 이유
-1. EndPoint 보안의 부재
-2. IoT Device의 안전 및 보안에 관한 규정이나 표준이 부재하여 기본 암호 정책, 액세스 제어 권한, 보안 구성과 같은 설정이 미흡
-3. 24시간 * 365일 사용이 가능
-4. 0-day Attack이 비교적 쉽기 때문에 빠른 감염이 가능
-
-Botnet은 "C" 로 구현되어 있으며, C&C 서버는 "GO"로 구현되어 있다.
-
 
 ## Mirai botnet 동작과정
 
