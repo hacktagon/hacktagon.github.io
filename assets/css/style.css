@@ -146,9 +146,9 @@ main, .notepad-share-icons, .notepad-disqus {
   background: white; }
 .notepad-site-head .notepad-site-head-menu .notepad-blog-logo {
   display: inline-block;
-  max-height: 5rem; }
+  max-height: 10rem; }
 .notepad-site-head .notepad-site-head-menu .notepad-blog-logo img {
-  max-height: 5rem; }
+  max-height: 10rem; }
 .notepad-site-head .notepad-site-head-menu .title {
   display: inline-block;
   padding: 0;
