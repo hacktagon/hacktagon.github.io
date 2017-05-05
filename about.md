@@ -4,7 +4,9 @@ permalink: /about/index.html
 title: About Us
 ---
 
-We are mukpiece
+<img src="{{ site.url }}/images/bug.png" style="float: block; margin: auto;">
+
+<br>
 
 ### We are heavy _eaters_.
 
