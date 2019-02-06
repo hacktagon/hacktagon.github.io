@@ -35,12 +35,18 @@ IoT 관련해서는 국내/외 다양한 관련 부처에서 다양한 보안 �
 
 ### 국내 KISA
 
+[https://www.kisa.or.kr/public/laws/laws3_View.jsp?cPage=1&mode=view&p_No=259&b_No=259&d_No=80&ST=&SV=]
+(https://www.kisa.or.kr/public/laws/laws3_View.jsp?cPage=1&mode=view&p_No=259&b_No=259&d_No=80&ST=&SV=)
 - IoT 공통보안원칙 :
 ```
 https://www.kisa.or.kr/public/laws/laws3_View.jsp?cPage=2&mode=view&p_No=259&b_No=259&d_No=67&ST=T&SV=
 ```
 - IoT 공통보안 가이드 :
-(https://www.kisa.or.kr/public/laws/laws3_View.jsp?cPage=1&mode=view&p_No=259&b_No=259&d_No=80&ST=&SV=)
+
+
+[https://www.kisa.or.kr/public/laws/laws3_View.jsp?cPage=1&mode=view&p_No=259&b_No=259&d_No=80&ST=&SV=]
+
+
 - 홈ㆍ가전 IoT 보안가이드 : https://www.kisa.or.kr/public/laws/laws3_View.jsp?cPage=1&mode=view&p_No=259&b_No=259&d_No=93&ST=&SV=
 - 사물인터넷(IoT) 환경에서의 암호인증기술 이용 안내서 : https://www.kisa.or.kr/public/laws/laws3_View.jsp?cPage=1&mode=view&p_No=259&b_No=259&d_No=84&ST=total&SV=
 
