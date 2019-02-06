@@ -31,7 +31,7 @@ IoT 서비스는 사용 목적에 따라 크게 CIoT와 IIoT로 구분되게 됩
 - IoT 네트워크 기술 정보 : https://m.blog.naver.com/PostView.nhn?blogId=scw0531&logNo=220679511015&fbclid=IwAR0-Ju2zva3ZzzT0itBrPo4tMcKzEa8dYufZ3-72c4WH_flGP9vFex2m7pg&proxyReferer=https%3A%2F%2Fwww.facebook.com%2F
 
 ## 2. IoT 보안 가이드
-IoT 관련해서는 국내/외 다양한 관련 부처에서 다양한 보안 가이드를 제공하고 있습니다. 이러한 보안 가이드는 IoT 보안 관련 컴플라이언스 수립과 보안 점검에 대해 중요한 기준이 될 수 있습니다. 아래 보안 가이드는 순수 IoT에 관한 내용으로 아래를 정리하였으며, 산업 별 보안 권고 사항은 제외하겠습니다.
+IoT 관련해서는 국내/외 다양한 관련 부처에서 다양한 보안 가이드를 제공하고 있습니다. 이러한 보안 가이드는 IoT 보안 관련 컴플라이언스 수립과 보안 점검에 대해 중요한 기준이 될 수 있습니다. 아래 보안 가이드는 순수 IoT 및 스마트 홈에 관한 내용으로 아래를 정리하였으며, 산업 별 보안 권고 사항은 제외하겠습니다.
 
 ### 국내 KISA
 
@@ -41,28 +41,33 @@ IoT 관련해서는 국내/외 다양한 관련 부처에서 다양한 보안 �
 - 사물인터넷(IoT) 환경에서의 암호인증기술 이용 안내서 : https://www.kisa.or.kr/public/laws/laws3_View.jsp?cPage=1&mode=view&p_No=259&b_No=259&d_No=84&ST=total&SV=
 
 ### 국내 KISA 정보보호클러스터 융합보안혁신센터
-IoT 보안인증서비스 : https://www.kisis.or.kr/user/bbs/kisis/66/312/bbsDataView/10176.do?page=1&column=&search=&searchSDate=&searchEDate=&bbsDataCategory=
-홈네트워크건물인증 : https://www.kisis.or.kr/user/bbs/kisis/62/273/bbsDataView/8791.do?page=1&column=&search=&searchSDate=&searchEDate=&bbsDataCategory=
+- IoT 보안인증서비스 : https://www.kisis.or.kr/user/bbs/kisis/66/312/bbsDataView/10176.do?page=1&column=&search=&searchSDate=&searchEDate=&bbsDataCategory=
+- 홈네트워크건물인증 : https://www.kisis.or.kr/user/bbs/kisis/62/273/bbsDataView/8791.do?page=1&column=&search=&searchSDate=&searchEDate=&bbsDataCategory=
 
 
 ### 해외 NIST
-Interagency Report on Status of International Cybersecurity  Standardization for the Internet of Things :
+- Interagency Report on Status of International Cybersecurity  Standardization for the Internet of Things :
 https://csrc.nist.gov/CSRC/media/Publications/nistir/8200/draft/documents/nistir8200-draft.pdf
 
-Securing the Home IoT Network
+- Securing the Home IoT Network :
 https://www.sans.org/reading-room/whitepapers/internet/paper/37717
 
-[OWASP]
-OWASP 2018 IoT Top 10 : https://www.owasp.org/index.php/OWASP_Internet_of_Things_Project
+### 해외 OWASP
+- OWASP 2018 IoT Top 10 : https://www.owasp.org/index.php/OWASP_Internet_of_Things_Project
 
-일본 IoT 보안평 지침 :
+### 해외 일본
+- 일본 IoT 보안평 지침 :
 https://www.ccds.or.jp/public_document/index.html?fbclid=IwAR2pt8ezXISwgyg8YnGqmRAm4kZVoBEZ5AAiFc5kowb-_sZjeDn9cyq3GBA
 
-IoT에 대한 Security & Privacy Guidelines
+### 해외 SANS
+- A Black-Box Approach to Embedded Systems Vulnerability Assessment :
+https://www.sans.org/reading-room/whitepapers/basics/paper/37452
+
+### 기타 모음 자료
+- IoT에 대한 Security & Privacy Guidelines : 
 https://www.schneier.com/blog/archives/2017/02/security_and_pr.html?fbclid=IwAR02gbKHU0tZCJG1AQ21q-1ryfi-jGnesceJha7RUgppNHf86JsgjZmQBxw
 
-A Black-Box Approach to Embedded Systems Vulnerability Assessment
-https://www.sans.org/reading-room/whitepapers/basics/paper/37452
+
 
 3. IoT 보안 입문 안내서
 [하드웨어 해킹]
