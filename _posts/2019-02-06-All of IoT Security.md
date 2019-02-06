@@ -35,7 +35,10 @@ IoT 관련해서는 국내/외 다양한 관련 부처에서 다양한 보안 �
 
 ### 국내 KISA
 
-- IoT 공통보안원칙 : https://www.kisa.or.kr/public/laws/laws3_View.jsp?cPage=2&mode=view&p_No=259&b_No=259&d_No=67&ST=T&SV=
+- IoT 공통보안원칙 :
+```
+https://www.kisa.or.kr/public/laws/laws3_View.jsp?cPage=2&mode=view&p_No=259&b_No=259&d_No=67&ST=T&SV=
+```
 - IoT 공통보안 가이드 : https://www.kisa.or.kr/public/laws/laws3_View.jsp?cPage=1&mode=view&p_No=259&b_No=259&d_No=80&ST=&SV=
 - 홈ㆍ가전 IoT 보안가이드 : https://www.kisa.or.kr/public/laws/laws3_View.jsp?cPage=1&mode=view&p_No=259&b_No=259&d_No=93&ST=&SV=
 - 사물인터넷(IoT) 환경에서의 암호인증기술 이용 안내서 : https://www.kisa.or.kr/public/laws/laws3_View.jsp?cPage=1&mode=view&p_No=259&b_No=259&d_No=84&ST=total&SV=
@@ -64,34 +67,32 @@ https://www.ccds.or.jp/public_document/index.html?fbclid=IwAR2pt8ezXISwgyg8YnGqm
 https://www.sans.org/reading-room/whitepapers/basics/paper/37452
 
 ### 기타 모음 자료
-- IoT에 대한 Security & Privacy Guidelines : 
+- IoT에 대한 Security & Privacy Guidelines :
+```
 https://www.schneier.com/blog/archives/2017/02/security_and_pr.html?fbclid=IwAR02gbKHU0tZCJG1AQ21q-1ryfi-jGnesceJha7RUgppNHf86JsgjZmQBxw
+```
 
+## 3. IoT 보안 입문 안내서
+아래 URL은 IoT 해킹을 하기 위해 필요한 지식을 잘 정리한 자료입니다. 요즘은 쉽게 찾을 수 있는 내용이지만, 당시 작성했을 작성자분들에게 감사에 인사를 드립니다!
 
-
-3. IoT 보안 입문 안내서
-[하드웨어 해킹]
+### [하드웨어 해킹]
 - GrayHash 정구홍 수석님 자료 :
 https://www.hackerschool.org/HardwareHacking/?fbclid=IwAR2Edhs8Fuml72N9gugJRaI5__TyE5GJ8Fy9TM7x4mkmcFbJmulg3Jbwe3k
 
-개인적으로 추천하는
+- The JTAG Interface: An Attacker's Perspective : https://optivstorage.blob.core.windows.net/web/file/55e86eae3f04450d9bafcbb3a94559ca/JTAG.Whitepaper.pdf?fbclid=IwAR2M8NVJknkM8NpuiE6lMU-RcMKtMf5ejy4JOvitRiiYjLvWf4y9ugE3Pag
 
-[MIPS 기반의 IoT Device Hacking Bible]
+- Practical Reverse Engineering Part 1 (Hunting for Debug Ports) : http://jcjc-dev.com/2016/04/08/reversing-huawei-router-1-find-uart/
+
+### [MIPS 기반의 IoT Device Hacking Bible]
+위 두 URL은 개인적으로 MIPS 기반의 IoT Device의 Exploit을 위해 잘 설명된 문서라 생각하여, 참고하게 되었습니다.
+
 - https://www.vantagepoint.sg/papers/MIPS-BOF-LyonYang-PUBLIC-FINAL.pdf
 - https://www.exploit-db.com/docs/36806.pdf
 
-[Beginner's Guide to Exploitation on ARM]
-- https://zygosec.com/Products/
-위 두 URL은 개인적으로 MIPS 기반의 IoT Device의 Exploit을 위해 잘 설명된 문서라 생각하여, 참고하게 되었습니다.
+### [ARM 기반의 Exoloit 기법 정리]
+- Beginner's Guide to Exploitation on ARM : https://zygosec.com/Products/
+- Very vulnerable ARM application (CTF style exploitation tutorial) : https://github.com/bkerler/exploit_me?fbclid=IwAR34sJuay_BY0mCOsPqrTIVgjBngdx6Ge8s0Ld2mqbFUVSu3bOzP1isf7uk
 
-Very vulnerable ARM application (CTF style exploitation tutorial) :
-https://github.com/bkerler/exploit_me?fbclid=IwAR34sJuay_BY0mCOsPqrTIVgjBngdx6Ge8s0Ld2mqbFUVSu3bOzP1isf7uk
-
-The JTAG Interface: An Attacker's Perspective :
-https://optivstorage.blob.core.windows.net/web/file/55e86eae3f04450d9bafcbb3a94559ca/JTAG.Whitepaper.pdf?fbclid=IwAR2M8NVJknkM8NpuiE6lMU-RcMKtMf5ejy4JOvitRiiYjLvWf4y9ugE3Pag
-
-Practical Reverse Engineering Part 1 - Hunting for Debug Ports
-http://jcjc-dev.com/2016/04/08/reversing-huawei-router-1-find-uart/
 
 4. IoT Threat Analysis
 MITRE ATT&CK : https://www.mitre.org/publications/technical-papers?fbclid=IwAR0CLO9qh6_mepxspFIxnsFs6ddKUmSOpJgXiPiFE0688H7K4owy7UiT0aw
