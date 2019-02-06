@@ -63,10 +63,7 @@ https://www.ccds.or.jp/public_document/index.html?fbclid=IwAR2pt8ezXISwgyg8YnGqm
 https://www.sans.org/reading-room/whitepapers/basics/paper/37452
 
 ### 기타 모음 자료
-- IoT에 대한 Security & Privacy Guidelines :
-```
-https://www.schneier.com/blog/archives/2017/02/security_and_pr.html?fbclid=IwAR02gbKHU0tZCJG1AQ21q-1ryfi-jGnesceJha7RUgppNHf86JsgjZmQBxw
-```
+- IoT에 대한 Security & Privacy Guidelines : https://www.schneier.com/blog/archives/2017/02/security_and_pr.html?fbclid=IwAR02gbKHU0tZCJG1AQ21q-1ryfi-jGnesceJha7RUgppNHf86JsgjZmQBxw
 
 ## 3. IoT 보안 입문 안내서
 아래 URL은 IoT 해킹을 하기 위해 필요한 지식을 잘 정리한 자료입니다. 요즘은 쉽게 찾을 수 있는 내용이지만, 당시 작성했을 작성자분들에게 감사에 인사를 드립니다!
