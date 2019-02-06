@@ -11,7 +11,7 @@ featured: true
 # 개요
 해당 글은 2년 정도 IoT 보안과 관련된 업무를 수행하면서, 자료를 정리하는 글입니다. IoT 보안과 관련된 공부를 수행하는 분에게 참고가 되었으면 합니다.
 
-1. IoT 서비스 종류 파악
+## 1. IoT 서비스 종류 파악
 IoT 서비스는 사용 목적에 따라 크게 CIoT와 IIoT로 구분되게 됩니다.
 - Client IoT : Smart Home, Healthcare
 - Industry IoT : Smart Factory, Grid
@@ -19,28 +19,33 @@ IoT 서비스는 사용 목적에 따라 크게 CIoT와 IIoT로 구분되게 됩
 아래 URL에서는 다양한 IoT 서비스에 대해 설명하고 있습니다.
 
 - 한국사물인터넷협회 : https://www.kiot.or.kr/main/index.nx
-- 사물인터넷 제품 및 서비스 열람 서비스 : https://www.kiot.or.kr/cms/fileDown?PAGE=1&SC_WORD=&SC_CATE=&CM_CODE=0u8j06&open_modal=&c=1676
-- 사물인터넷융합포럼 포럼 표준자료실 : http://www.iotforum.kr/stan/stan.list.asp
-- Building an Open End-to-End Internet of Things Architecture - IoT의 기본적인 아키텍처에 대해 설명을 하고 있음 : https://next.redhat.com/2017/12/19/building-an-open-end-to-end-internet-of-things-architecture/?lipi=urn%3Ali%3Apage%3Ad_flagship3_feed%3BKPRZYJ4HTWKAeIZgwqJd4Q%3D%3D&fbclid=IwAR3CiD8nYSvJXfniKaT7T4PrtiEiAeqy7onXjS6QXCnlYUhz-Bx8zFHOybE
 
-- Table Comparing Wireless Protocols for IoT Device - IoT 디바이스에서 사용되는 무선 프로토콜 비교 : http://glowlabs.co/wireless-protocols/?fbclid=IwAR23_NPDVqi_inuzErE8pgIzZn8lAmrtRNMyKEJFQXIDyK8WLyLLghKG-Jw
+- 사물인터넷 제품 및 서비스 열람 서비스 : https://www.kiot.or.kr/cms/fileDown?PAGE=1&SC_WORD=&SC_CATE=&CM_CODE=0u8j06&open_modal=&c=1676
+
+- 사물인터넷융합포럼 포럼 표준자료실 : http://www.iotforum.kr/stan/stan.list.asp
+
+- Building an Open End-to-End Internet of Things Architecture (IoT의 기본적인 아키텍처에 대해 설명을 하고 있음) : https://next.redhat.com/2017/12/19/building-an-open-end-to-end-internet-of-things-architecture/?lipi=urn%3Ali%3Apage%3Ad_flagship3_feed%3BKPRZYJ4HTWKAeIZgwqJd4Q%3D%3D&fbclid=IwAR3CiD8nYSvJXfniKaT7T4PrtiEiAeqy7onXjS6QXCnlYUhz-Bx8zFHOybE
+
+- Table Comparing Wireless Protocols for IoT Device (IoT 디바이스에서 사용되는 무선 프로토콜 비교) : http://glowlabs.co/wireless-protocols/?fbclid=IwAR23_NPDVqi_inuzErE8pgIzZn8lAmrtRNMyKEJFQXIDyK8WLyLLghKG-Jw
 
 - IoT 네트워크 기술 정보 : https://m.blog.naver.com/PostView.nhn?blogId=scw0531&logNo=220679511015&fbclid=IwAR0-Ju2zva3ZzzT0itBrPo4tMcKzEa8dYufZ3-72c4WH_flGP9vFex2m7pg&proxyReferer=https%3A%2F%2Fwww.facebook.com%2F
 
-2. IoT 보안 가이드
-IoT 관련해서는 국내 관련 부처에서 다양한 보안 가이드를 제공하고 있다. 순수 IoT에 관한 내용으로 아래를 정리하였으며, 산업 별 보안 권고 사항은 제외한다.
+## 2. IoT 보안 가이드
+IoT 관련해서는 국내/외 다양한 관련 부처에서 다양한 보안 가이드를 제공하고 있습니다. 이러한 보안 가이드는 IoT 보안 관련 컴플라이언스 수립과 보안 점검에 대해 중요한 기준이 될 수 있습니다. 아래 보안 가이드는 순수 IoT에 관한 내용으로 아래를 정리하였으며, 산업 별 보안 권고 사항은 제외하겠습니다.
 
-[KISA]
-IoT 공통보안원칙 : https://www.kisa.or.kr/public/laws/laws3_View.jsp?cPage=2&mode=view&p_No=259&b_No=259&d_No=67&ST=T&SV=
-IoT 공통보안 가이드 : https://www.kisa.or.kr/public/laws/laws3_View.jsp?cPage=1&mode=view&p_No=259&b_No=259&d_No=80&ST=&SV=
-홈ㆍ가전 IoT 보안가이드 : https://www.kisa.or.kr/public/laws/laws3_View.jsp?cPage=1&mode=view&p_No=259&b_No=259&d_No=93&ST=&SV=
-사물인터넷(IoT) 환경에서의 암호인증기술 이용 안내서 : https://www.kisa.or.kr/public/laws/laws3_View.jsp?cPage=1&mode=view&p_No=259&b_No=259&d_No=84&ST=total&SV=
+### 국내 KISA
 
-[정보보호클러스터 융합보안혁신센터]
+- IoT 공통보안원칙 : https://www.kisa.or.kr/public/laws/laws3_View.jsp?cPage=2&mode=view&p_No=259&b_No=259&d_No=67&ST=T&SV=
+- IoT 공통보안 가이드 : https://www.kisa.or.kr/public/laws/laws3_View.jsp?cPage=1&mode=view&p_No=259&b_No=259&d_No=80&ST=&SV=
+- 홈ㆍ가전 IoT 보안가이드 : https://www.kisa.or.kr/public/laws/laws3_View.jsp?cPage=1&mode=view&p_No=259&b_No=259&d_No=93&ST=&SV=
+- 사물인터넷(IoT) 환경에서의 암호인증기술 이용 안내서 : https://www.kisa.or.kr/public/laws/laws3_View.jsp?cPage=1&mode=view&p_No=259&b_No=259&d_No=84&ST=total&SV=
+
+### 국내 KISA 정보보호클러스터 융합보안혁신센터
 IoT 보안인증서비스 : https://www.kisis.or.kr/user/bbs/kisis/66/312/bbsDataView/10176.do?page=1&column=&search=&searchSDate=&searchEDate=&bbsDataCategory=
 홈네트워크건물인증 : https://www.kisis.or.kr/user/bbs/kisis/62/273/bbsDataView/8791.do?page=1&column=&search=&searchSDate=&searchEDate=&bbsDataCategory=
 
-[NIST]
+
+### 해외 NIST
 Interagency Report on Status of International Cybersecurity  Standardization for the Internet of Things :
 https://csrc.nist.gov/CSRC/media/Publications/nistir/8200/draft/documents/nistir8200-draft.pdf
 
