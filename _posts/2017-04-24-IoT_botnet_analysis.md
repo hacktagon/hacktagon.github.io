@@ -579,3 +579,8 @@ VMware, Inc.
 
 ## 4.3 Protecting
 Amnesia botnet의 경우 DVR Device가 가지고 있는 RCE 취약점을 이용한 공격이기 때문에 해당 취약점에 대해 제조사가 업데이트를 제공하는 것이 먼저 되어야 하며, 특정 시스템을 파악할 수 있는 메시지인 "Cross web server"처럼 노출되지 않도록 개발 단계에서부터 시스템을 구성해야 한다.
+
+
+# 기타 IoT Botnet
+Remaiten : http://blog.malwaremustdie.org/
+https://www.welivesecurity.com/2016/03/30/meet-remaiten-a-linux-bot-on-steroids-targeting-routers-and-potentially-other-iot-devices/
