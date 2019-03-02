@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "All of IoT Security"
+title:  "Almost of IoT Security"
 tag:   Analysis
 categories: persu IoT
 modified: 2019-02-06
@@ -19,15 +19,10 @@ IoT 서비스는 사용 목적에 따라 크게 CIoT와 IIoT로 구분되게 됩
 아래 URL에서는 다양한 IoT 서비스에 대해 설명하고 있습니다.
 
 - 한국사물인터넷협회 : https://www.kiot.or.kr/main/index.nx
-
 - 사물인터넷 제품 및 서비스 열람 서비스 : https://www.kiot.or.kr/cms/fileDown?PAGE=1&SC_WORD=&SC_CATE=&CM_CODE=0u8j06&open_modal=&c=1676
-
 - 사물인터넷융합포럼 포럼 표준자료실 : http://www.iotforum.kr/stan/stan.list.asp
-
 - Building an Open End-to-End Internet of Things Architecture (IoT의 기본적인 아키텍처에 대해 설명을 하고 있음) : https://next.redhat.com/2017/12/19/building-an-open-end-to-end-internet-of-things-architecture/?lipi=urn%3Ali%3Apage%3Ad_flagship3_feed%3BKPRZYJ4HTWKAeIZgwqJd4Q%3D%3D&fbclid=IwAR3CiD8nYSvJXfniKaT7T4PrtiEiAeqy7onXjS6QXCnlYUhz-Bx8zFHOybE
-
 - Table Comparing Wireless Protocols for IoT Device (IoT 디바이스에서 사용되는 무선 프로토콜 비교) : http://glowlabs.co/wireless-protocols/?fbclid=IwAR23_NPDVqi_inuzErE8pgIzZn8lAmrtRNMyKEJFQXIDyK8WLyLLghKG-Jw
-
 - IoT 네트워크 기술 정보 : https://m.blog.naver.com/PostView.nhn?blogId=scw0531&logNo=220679511015&fbclid=IwAR0-Ju2zva3ZzzT0itBrPo4tMcKzEa8dYufZ3-72c4WH_flGP9vFex2m7pg&proxyReferer=https%3A%2F%2Fwww.facebook.com%2F
 
 ## 2. IoT 보안 가이드
@@ -75,7 +70,7 @@ https://www.hackerschool.org/HardwareHacking/?fbclid=IwAR2Edhs8Fuml72N9gugJRaI5_
 - Practical Reverse Engineering Part 1 (Hunting for Debug Ports) : http://jcjc-dev.com/2016/04/08/reversing-huawei-router-1-find-uart/
 
 ### [MIPS 기반의 IoT Device Hacking Bible]
-위 두 URL은 개인적으로 MIPS 기반의 IoT Device의 Exploit을 위해 잘 설명된 문서라 생각하여, 참고하게 되었습니다.
+아래 두 URL은 개인적으로 MIPS 기반의 IoT Device의 Exploit을 위해 잘 설명된 문서라 생각하여, 참고하게 되었습니다.
 - https://www.vantagepoint.sg/papers/MIPS-BOF-LyonYang-PUBLIC-FINAL.pdf
 - https://www.exploit-db.com/docs/36806.pdf
 
@@ -98,7 +93,7 @@ https://blog.cobalt.io/pen-testing-as-a-service-life-cycle-87e122b0c61b?fbclid=I
 https://www.denimgroup.com/resources/blog/2017/11/getting-started-with-iot-security-with-threat-modeling/?lipi=urn%3Ali%3Apage%3Ad_flagship3_pulse_read%3BtGhVz%2BNYQRiSgJC%2Bt%2FEWQQ%3D%3D&fbclid=IwAR1EgBfBAsz4628Kmuzr-qAR_vQ-KeaGe76fOXx6turl3DFPGRcs7mI5OzM
 
 
-## 4. IoT 보안 / 해킹 사례
+## 5. IoT 보안 / 해킹 사례
 요즘은 구글링 조금만하면 IoT 디바이스 해킹 사례를 다수 확인 할 수 있습니다. 아래 URL은 다양한 공격 벡터를 가진 사례들입니다.
 
 - TR-069 Protocol : https://sec-consult.com/en/blog/2018/05/tr-069-iot-before-it-was-cool/?fbclid=IwAR3wj1VspIVnEghYA-YRPcL6W77chsQT-xouradAFYzqqGjJuzRbIvjZu5k
@@ -118,7 +113,7 @@ http://securityaffairs.co/wordpress/67113/iot/goahead-flaws.html?fbclid=IwAR1vx0
 - REMOTE CODE EXECUTION (CVE-2017-13772) WALKTHROUGH ON A TP-LINK ROUTER (MIPS 기반의 장비를 QEMU에 올려 취약점을 찾는 내용 Basic으로 좋음) : https://fidusinfosec.com/tp-link-remote-code-execution-cve-2017-13772/?fbclid=IwAR3M8HQCxVV_mdh5CgVO6qcOfTwZHGvUkcqJfQAGyIw_zPZR9dkFOvb0GG8
 - HACK XIAOMI MI SMARTHOME : http://faire-ca-soi-meme.fr/hack/2017/03/13/hack-xiaomi-mi-smarthome-zigbee-sniffer/?fbclid=IwAR0_cQj4zKPKre29gkOSDFlzYlbxKlkeNVAAp33q9WATieez_UW-iGLJFYw
 
-## 5. IoT 보안 Tool
+## 6. IoT 보안 Tool
 제가 사용하는 최애 Tool 은 Attify OS 입니다. IoT 해킹을 하기 위한 툴이 자동으로 인스톨되어 있고, 유지도 잘되어 있죠. 그 외에는 Qemu, burp, iptables, tcpdump 등입니다. 또한 static compile 된 busybox, tcpdump, gdbserver 등이 필요한 경우가 있는데 구글링 혹은 아래 url을 통해 다운로드 받으시길 바랍니다.
 
 - static compile tools : https://github.com/hacktagon/embed_tools
@@ -131,7 +126,7 @@ http://securityaffairs.co/wordpress/67113/iot/goahead-flaws.html?fbclid=IwAR1vx0
 - ASTo (An IoT Network Security Analysis Tool and Visualizer) : https://www.kitploit.com/2017/07/asto-iot-network-security-analysis-tool.html?utm_source=dlvr.it&utm_medium=facebook&fbclid=IwAR3NEkJGl03gpMlivhOWKv53d9FrL9nJEJnQSXQcaR-UOywzKnYsGI1uGYI
 - Mipsdis: MIPS disassembler in the browser : http://blog.loadzero.com/blog/announcing-mipsdis/?fbclid=IwAR0FExLw0fjCMIKIa8ePZEb2j3B1zZZQHz5IPbd26-dX5S8nqFrpxhuifJA
 
-## 6. IoT Bonet Malware 보고서
+## 7. IoT Bonet Malware 보고서
 Mirai 이후에 IoT에 다양한 Botnet 들이 발견되고 있습니다. (사실 Mirai 이전에도 많았습니다;) Mirai 외 다양한 IoT botnet 들을 정리한 자료이며, 연구용? 으로 샘플이 필요하신분은 직접 구하시길 바랍니다 :)
 
 - The Moon : https://blog.netlab.360.com/file/TheMoon-botnet.pdf?fbclid=IwAR1qmdaMVChS6qLectoo5lwLk2kqWBSiRbEXLi2_YAvK9UjX15jgtEEa6Xs
