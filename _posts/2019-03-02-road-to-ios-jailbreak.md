@@ -2,7 +2,7 @@
 layout: post
 title:  "Road to iOS Jailbreak - Preview"
 tag:   Analysis
-categories: develacker iOS jailbreak
+categories: ios jailbreak
 modified: 2019-03-02
 comments: true
 featured: true
