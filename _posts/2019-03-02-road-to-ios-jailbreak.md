@@ -12,6 +12,6 @@ featured: true
 
 
 ## Privilege Model
-![ios privilege model](../images/hkroo/2019-03-02-14-07-39.png)
+![ios privilege model](https://github.com/hacktagon/hacktagon.github.io/blob/master/images/hkroo/2019-03-02-14-07-39.png)
 
 ## References
