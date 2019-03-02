@@ -17,7 +17,3 @@ featured: true
 - Part 6 : Analysis on [extra_recipe](https://bugs.chromium.org/p/project-zero/issues/detail?id=1004)
 - Part 7 : Analysis on [async_wake](https://bugs.chromium.org/p/project-zero/issues/detail?id=1417)
 - Part 8 : Analysis on [voucher_swap](https://bugs.chromium.org/p/project-zero/issues/detail?id=1731)
-
-
-## Privilege Model
-![ios privilege model](/images/hkroo/2019-03-02-14-07-39.png)
